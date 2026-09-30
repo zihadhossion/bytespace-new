@@ -1,0 +1,158 @@
+@import "tailwindcss";
+
+/*
+ * Tokens from Figma "Style Guide" page:
+ * - Grid: 12 columns, 120px margin, 40px gutter → 1200px content (container-page)
+ * - Neutral = Shuttle Gray, Primary = Persian Blue, Secondary = Electric Lime
+ * - Typography mapping (Figma → token):
+ *     Heading L/M/S/XS → text-display / text-title / text-heading / text-subheading
+ *     Body L/M/S/XS    → text-lg / text-base / text-sm / text-xs
+ *     Label L/M/S/XS   → text-label-l / text-label-m / text-label-s / text-label-xs
+ */
+@theme {
+  --container-page: 1280px;
+  --container-wide: 1440px;
+
+  /* Primary — Persian Blue */
+  --color-brand-50: #e7f6ff;
+  --color-brand-100: #d3eeff;
+  --color-brand-200: #b0ddff;
+  --color-brand-300: #81c5ff;
+  --color-brand-400: #4f9dff;
+  --color-brand-500: #2872ff;
+  --color-brand-600: #0445ff;
+  --color-brand-700: #0043ff;
+  --color-brand-800: #003be2;
+  --color-brand-900: #0b36a4;
+  --color-brand-950: #071e5f;
+
+  /* Secondary — Electric Lime */
+  --color-volt-50: #fdffe4;
+  --color-volt-100: #faffc5;
+  --color-volt-200: #f2ff92;
+  --color-volt-300: #e4ff54;
+  --color-volt-400: #d4fb20;
+  --color-volt-500: #cbfc01;
+  --color-volt-600: #8cb400;
+  --color-volt-700: #6a8902;
+  --color-volt-800: #546b09;
+  --color-volt-900: #465a0d;
+  --color-volt-950: #243300;
+
+  /* Neutral — Shuttle Gray */
+  --color-steel-50: #f5f5f6;
+  --color-steel-100: #e5e6e8;
+  --color-steel-200: #ced0d3;
+  --color-steel-300: #abaeb5;
+  --color-steel-400: #82868e;
+  --color-steel-500: #666973;
+  --color-steel-600: #585a62;
+  --color-steel-700: #4b4c53;
+  --color-steel-800: #424348;
+  --color-steel-900: #3a3b3f;
+  --color-steel-950: #242528;
+
+  /* Semantic */
+  --color-ink: #040819;
+  --color-muted: #4f4f4f;
+  --color-surface: #f5f5f6;
+  --color-soft: #fafafa;
+  --color-accent: #7f30f7;
+  --color-price: #300b6a;
+  --color-error-600: #dc2626;
+
+  /* Typography scale — Poppins SemiBold 120% / Satoshi Regular 160% */
+  --text-display: 72px;
+  --text-display--line-height: 1.2;
+  --text-display--letter-spacing: -0.01em;
+
+  --text-title: 44px;
+  --text-title--line-height: 1.2;
+  --text-title--letter-spacing: -0.01em;
+
+  --text-heading: 36px;
+  --text-heading--line-height: 1.2;
+  --text-heading--letter-spacing: -0.01em;
+
+  --text-subheading: 20px;
+  --text-subheading--line-height: 1.2;
+  --text-subheading--letter-spacing: -0.01em;
+
+  --text-lg: 18px;
+  --text-lg--line-height: 1.6;
+  --text-base: 16px;
+  --text-base--line-height: 1.6;
+  --text-sm: 14px;
+  --text-sm--line-height: 1.6;
+  --text-xs: 12px;
+  --text-xs--line-height: 1.6;
+
+  /* Labels — Satoshi Medium 120% (Figma Label L/M/S/XS) */
+  --text-label-l: 18px;
+  --text-label-l--line-height: 1.2;
+  --text-label-m: 16px;
+  --text-label-m--line-height: 1.2;
+  --text-label-s: 14px;
+  --text-label-s--line-height: 1.2;
+  --text-label-xs: 12px;
+  --text-label-xs--line-height: 1.2;
+
+  /* Card radius — Figma Course_Card_1 */
+  --radius-card: 24px;
+}
+
+@theme inline {
+  --font-heading: var(--font-poppins), "Poppins", ui-sans-serif, sans-serif;
+  --font-body: var(--font-satoshi), "Satoshi", ui-sans-serif, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white font-body text-steel-950 antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading font-semibold;
+  }
+}
+
+/*
+ * Responsive typography — applies only below md (768px).
+ * Unlayered rules override the `@layer theme` token values, and the
+ * text-* utilities compile to `font-size: var(--text-*)`, so every
+ * heading scales down on phones while >=768px stays pixel-identical.
+ * Line-heights are unitless (1.2), so they follow automatically.
+ */
+@media (width < 48rem) {
+  :root {
+    --text-display: 40px;
+    --text-title: 30px;
+    --text-heading: 26px;
+  }
+}
+
+@media (width >= 40rem) and (width < 48rem) {
+  :root {
+    --text-display: 56px;
+    --text-title: 36px;
+    --text-heading: 32px;
+  }
+}
+
+/* Horizontal-scroll filter pills: hide the scrollbar, keep swipe scroll */
+@utility scrollbar-hide {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
