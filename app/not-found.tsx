@@ -1,63 +1,54 @@
 import type { Metadata } from "next";
-import type { CSSProperties } from "react";
-import Link from "next/link";
 
 import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import Button from "@/components/ui/Button";
+import GridOverlay from "@/components/ui/GridOverlay";
+import Title from "@/components/ui/Title";
 
 export const metadata: Metadata = {
   title: "Page Not Found",
   description: "The page you are looking for doesn't exist.",
 };
 
-const gridBackground: CSSProperties = {
-  backgroundImage: [
-    "linear-gradient(to right, rgba(255,255,255,0.12) 0 2px, transparent 2px)",
-    "linear-gradient(to bottom, transparent 0 118px, rgba(255,255,255,0.12) 118px 120px)",
-  ].join(", "),
-  backgroundSize: "120px 120px",
-};
-
-const gradient404: CSSProperties = {
-  backgroundImage:
-    "linear-gradient(180deg, #d4fb20 0%, rgba(212, 251, 32, 0.25) 100%)",
-  WebkitBackgroundClip: "text",
-  backgroundClip: "text",
-  transform: "scaleX(1.275)",
-};
-
 export default function NotFoundPage() {
   return (
-    <div
-      className="min-h-screen bg-brand-800 [&_header]:bg-transparent"
-      style={gridBackground}
-    >
-      <Header tone="dark" />
+    <>
+      <div className="relative min-h-screen bg-brand-800 [&_header]:bg-transparent">
+        <GridOverlay />
 
-      <main className="mx-auto flex w-full max-w-page flex-col items-center px-6 pb-[125px] pt-14 text-center lg:px-10">
-        <span
-          className="block select-none font-heading text-[clamp(140px,25.6vw,368px)] leading-none font-semibold text-transparent"
-          style={gradient404}
-        >
-          404
-        </span>
+        <Header tone="dark" />
 
-        <h1 className="-mt-[14px] text-[clamp(36px,5vw,72px)] leading-[1.2] tracking-[-0.01em] text-white">
-          The page you are looking
-          <br />
-          for doesn&#8217;t exist
-        </h1>
+        <main className="relative mx-auto flex w-full max-w-page flex-col items-center px-6 pb-[125px] pt-[53px] text-center lg:px-10">
+          <span className="block select-none bg-[linear-gradient(180deg,#D4FB20_0%,rgba(212,251,32,0.96)_25%,rgba(212,251,32,0.81)_50.5%,rgba(212,251,32,0.61)_68%,rgba(255,255,255,0)_100%)] bg-clip-text font-heading text-[clamp(140px,33.3vw,480px)] leading-none font-semibold tracking-[-0.01em] text-transparent">
+            404
+          </span>
 
-        <p className="mt-[57px] text-base text-steel-100">
-          Try to use a correct url or go back to homepage to start again
-        </p>
+          <Title
+            as="h1"
+            variant="raw"
+            className="mt-[max(-9.23vw,-133px)] text-[clamp(36px,5vw,72px)] leading-[1.2] tracking-[-0.01em] text-white"
+          >
+            The page you are looking{" "}
+            <br className="hidden md:inline" />
+            for doesn&#8217;t exist
+          </Title>
 
-        <Link
-          href="/"
-          className="mt-9 inline-flex h-[46px] items-center justify-center rounded-full bg-volt-400 px-6 text-lg font-medium text-steel-950 transition-colors duration-200 hover:bg-volt-500"
-        >
-          Back to Home
-        </Link>
-      </main>
-    </div>
+          <Title
+            as="p"
+            variant="raw"
+            className="mt-[35px] font-heading text-[16.4px] text-steel-100"
+          >
+            Try to use a correct url or go back to homepage to start again
+          </Title>
+
+          <Button href="/" className="mt-[33px]">
+            Back to Home
+          </Button>
+        </main>
+      </div>
+
+      <Footer />
+    </>
   );
 }

@@ -56,8 +56,10 @@
   --color-ink: #040819;
   --color-muted: #4f4f4f;
   --color-surface: #f5f5f6;
+  --color-soft: #fafafa;
   --color-accent: #7f30f7;
   --color-price: #300b6a;
+  --color-error-600: #dc2626;
 
   /* Typography scale — Poppins SemiBold 120% / Satoshi Regular 160% */
   --text-display: 72px;
@@ -120,5 +122,37 @@
   h5,
   h6 {
     @apply font-heading font-semibold;
+  }
+}
+
+/*
+ * Responsive typography — applies only below md (768px).
+ * Unlayered rules override the `@layer theme` token values, and the
+ * text-* utilities compile to `font-size: var(--text-*)`, so every
+ * heading scales down on phones while >=768px stays pixel-identical.
+ * Line-heights are unitless (1.2), so they follow automatically.
+ */
+@media (width < 48rem) {
+  :root {
+    --text-display: 40px;
+    --text-title: 30px;
+    --text-heading: 26px;
+  }
+}
+
+@media (width >= 40rem) and (width < 48rem) {
+  :root {
+    --text-display: 56px;
+    --text-title: 36px;
+    --text-heading: 32px;
+  }
+}
+
+/* Horizontal-scroll filter pills: hide the scrollbar, keep swipe scroll */
+@utility scrollbar-hide {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
   }
 }
