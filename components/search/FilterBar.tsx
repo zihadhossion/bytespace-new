@@ -90,10 +90,11 @@ function Dropdown({
             : "bg-white text-steel-700 hover:border-steel-200"
         }`}
       >
-        <Icon src={icon} className="h-6 w-6" />
+        <Icon src={icon} alt="Filter" className="h-6 w-6" />
         {detail ? `${label}: ${detail}` : label}
         <Icon
           src={images.icons.chevronDown}
+          alt="Chevron down"
           className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`}
         />
       </Button>
@@ -132,6 +133,7 @@ function Dropdown({
                   {option.active ? (
                     <Icon
                       src={images.icons.checkBlue}
+                      alt="Checkmark"
                       className="h-4 w-4"
                     />
                   ) : null}

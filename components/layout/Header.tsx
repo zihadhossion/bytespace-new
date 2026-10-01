@@ -1,4 +1,8 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 import AppImage from "@/components/ui/AppImage";
 import MobileNav from "@/components/layout/MobileNav";
@@ -34,14 +38,36 @@ export default function Header({
 }: HeaderProps) {
   const isDark = tone === "dark";
   const isLogoOnly = variant === "logo";
+  const pathname = usePathname();
+
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 64);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <header
-      className={`w-full ${
-        isDark ? "bg-transparent text-steel-50" : "bg-white text-steel-950"
+      className={`relative w-full transition-all duration-200 ${
+        isDark
+          ? scrolled
+            ? "text-steel-950 shadow-[0_4px_24px_rgba(0,0,0,0.12)]"
+            : "text-steel-50"
+          : "bg-white text-steel-950"
       }`}
     >
-      <div className="relative mx-auto flex h-[72px] w-full max-w-page items-center justify-between px-5 sm:px-6 md:h-[120px] lg:px-10">
+      {isDark ? (
+        <div
+          aria-hidden
+          className={`pointer-events-none absolute inset-0 bg-white/85 backdrop-blur-md transition-opacity duration-200 ${
+            scrolled ? "opacity-100" : "opacity-0"
+          }`}
+        />
+      ) : null}
+      <div className="relative mx-auto flex h-[72px] w-full max-w-page items-center justify-between px-5 sm:px-6 md:h-[120px] md:px-0">
         {isLogoOnly ? (
           <Link
             href="/"
@@ -65,7 +91,9 @@ export default function Header({
               className="shrink-0 md:ml-0.5 md:-translate-y-[6.5px]"
             >
               <AppImage
-                src={images.logo.header}
+                src={
+                  isDark && !scrolled ? images.logo.header : images.logo.footer
+                }
                 alt="ByteSpace"
                 width={171}
                 height={37}
@@ -75,22 +103,30 @@ export default function Header({
             </Link>
 
             <nav
-              className="hidden items-start gap-6 md:absolute md:top-1/2 md:left-1/2 md:flex md:-translate-x-1/2 md:-translate-y-1/2"
+              className="hidden items-center gap-6 md:absolute md:top-1/2 md:left-1/2 md:flex md:-translate-x-1/2 md:-translate-y-1/2"
               aria-label="Primary"
             >
-              {navLinks.map((link, index) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`text-base transition-opacity hover:opacity-70 ${
-                    index === 0
-                      ? "font-medium leading-[1.2]"
-                      : "leading-[1.6]"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {navLinks.map((link) => {
+                const isActive =
+                  link.href === "/"
+                    ? pathname === "/"
+                    : pathname.startsWith(link.href);
+
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    aria-current={isActive ? "page" : undefined}
+                    className={`text-base leading-6 transition-opacity hover:opacity-70 ${
+                      isActive
+                        ? "font-medium underline decoration-2 underline-offset-[6px]"
+                        : ""
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
             </nav>
 
             <div className="flex items-center gap-2 md:items-start md:gap-6">
@@ -107,7 +143,7 @@ export default function Header({
                 {authLinks.join.label}
               </Link>
               <CartIcon />
-              <MobileNav tone={tone} />
+              <MobileNav tone={isDark && scrolled ? "light" : tone} />
             </div>
           </>
         )}

@@ -63,7 +63,7 @@ export default function Pagination({
           aria-disabled="true"
           className="flex h-12 w-14 items-center justify-center rounded-full border border-steel-200 bg-white opacity-40"
         >
-          <Icon src={images.icons.arrowLeft} className="h-6 w-6" />
+          <Icon src={images.icons.arrowLeft} alt="Previous page" className="h-6 w-6" />
         </span>
       ) : (
         <Button
@@ -74,7 +74,7 @@ export default function Pagination({
           aria-label="Previous page"
           className="h-12 w-14 bg-white hover:border-steel-200"
         >
-          <Icon src={images.icons.arrowLeft} className="h-6 w-6" />
+          <Icon src={images.icons.arrowLeft} alt="Previous page" className="h-6 w-6" />
         </Button>
       )}
 
@@ -115,7 +115,7 @@ export default function Pagination({
           aria-disabled="true"
           className="flex h-12 w-14 items-center justify-center rounded-full border border-steel-200 bg-white opacity-40"
         >
-          <Icon src={images.icons.arrowRight} className="h-6 w-6" />
+          <Icon src={images.icons.arrowRight} alt="Next page" className="h-6 w-6" />
         </span>
       ) : (
         <Button
@@ -126,7 +126,7 @@ export default function Pagination({
           aria-label="Next page"
           className="h-12 w-14 bg-white hover:border-steel-200"
         >
-          <Icon src={images.icons.arrowRight} className="h-6 w-6" />
+          <Icon src={images.icons.arrowRight} alt="Next page" className="h-6 w-6" />
         </Button>
       )}
     </nav>

@@ -6,7 +6,7 @@ import Header from "@/components/layout/Header";
 export default function SiteLayout({ children }: { children: ReactNode }) {
   return (
     <div className="relative">
-      <div className="absolute inset-x-0 top-0 z-50">
+      <div className="fixed inset-x-0 top-0 z-50">
         <Header tone="dark" />
       </div>
 

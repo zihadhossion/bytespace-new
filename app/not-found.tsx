@@ -14,12 +14,12 @@ export const metadata: Metadata = {
 export default function NotFoundPage() {
   return (
     <>
-      <div className="relative min-h-screen bg-brand-800 [&_header]:bg-transparent">
+      <div className="relative min-h-screen bg-brand-800">
         <GridOverlay />
 
         <Header tone="dark" />
 
-        <main className="relative mx-auto flex w-full max-w-page flex-col items-center px-6 pb-[125px] pt-[53px] text-center lg:px-10">
+        <main className="relative mx-auto flex w-full max-w-page flex-col items-center px-5 pb-[125px] pt-[53px] text-center sm:px-6 md:px-0">
           <span className="block select-none bg-[linear-gradient(180deg,#D4FB20_0%,rgba(212,251,32,0.96)_25%,rgba(212,251,32,0.81)_50.5%,rgba(212,251,32,0.61)_68%,rgba(255,255,255,0)_100%)] bg-clip-text font-heading text-[clamp(140px,33.3vw,480px)] leading-none font-semibold tracking-[-0.01em] text-transparent">
             404
           </span>

@@ -22,7 +22,7 @@ export default function Testimonials({ className = "" }: TestimonialsProps) {
         </div>
       </div>
 
-      <div className="relative mx-auto w-full max-w-page px-6 pt-12 pb-14 md:pt-[74px] md:pb-[57px] lg:px-10">
+      <div className="relative mx-auto w-full max-w-page px-5 pt-12 pb-14 sm:px-6 md:px-0 md:pt-[74px] md:pb-[57px]">
         <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end lg:gap-[43px]">
           <Title
             as="h2"

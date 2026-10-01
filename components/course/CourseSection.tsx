@@ -14,7 +14,7 @@ export default function CourseSection({
   children,
 }: CourseSectionProps) {
   return (
-    <section aria-labelledby={id} className="flex flex-col gap-6">
+    <section aria-labelledby={id} className="flex flex-col gap-4 sm:gap-6">
       <Title
         as="h2"
         id={id}

@@ -23,7 +23,7 @@ export default function Home() {
 
         <section
           id="featured-courses"
-          className="mx-auto w-full max-w-page px-6 pt-12 md:pt-[72px] lg:px-10"
+          className="mx-auto w-full max-w-page px-5 pt-12 sm:px-6 md:px-0 md:pt-[72px]"
         >
           <div className="mx-auto flex max-w-[917px] flex-col items-center gap-4 text-center">
             <Title as="h2" variant="title" className="text-title text-ink">

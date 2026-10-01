@@ -84,7 +84,7 @@ export default function EnrollCard({ course }: EnrollCardProps) {
       <ul className="flex flex-col gap-3">
         {enrollCard.includes.map((item) => (
           <li key={item.label} className="flex h-[26px] items-center gap-2">
-            <Icon src={item.icon} className="h-6 w-6 shrink-0" />
+            <Icon src={item.icon} alt="Course feature" className="h-6 w-6 shrink-0" />
             <span className="text-base text-steel-700">{item.label}</span>
           </li>
         ))}
@@ -111,9 +111,16 @@ export default function EnrollCard({ course }: EnrollCardProps) {
           </div>
         </div>
         <Title as="p" variant="base" className="text-base text-steel-700">{enrollCard.blurb}</Title>
-        <Button variant="outline" size="none" className="h-[35px] w-fit px-4 py-2 text-label-m text-steel-700">
-          See Full Profile
-        </Button>
+        {creator ? (
+          <Button
+            href={`/creators/${creator.slug}`}
+            variant="outline"
+            size="none"
+            className="h-[35px] w-fit px-4 py-2 text-label-m text-steel-700"
+          >
+            See Full Profile
+          </Button>
+        ) : null}
       </div>
     </aside>
   );

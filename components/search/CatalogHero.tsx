@@ -30,7 +30,7 @@ export default function CatalogHero({
     >
       <GridOverlay />
 
-      <div className="relative mx-auto flex w-full max-w-page flex-col items-center gap-8 px-6 pt-[164px] lg:px-10">
+      <div className="relative mx-auto flex w-full max-w-page flex-col items-center gap-8 px-5 pt-[164px] sm:px-6 md:px-0">
         <Title
           as="h1"
           variant="heading"
@@ -56,7 +56,7 @@ export default function CatalogHero({
               aria-label={searchAriaLabel}
               className="-mx-1 h-8 w-8 shrink-0"
             >
-              <Icon src={images.icons.searchGray} className="h-6 w-6" />
+              <Icon src={images.icons.searchGray} alt="Search" className="h-6 w-6" />
             </Button>
             <input
               key={q}
@@ -71,7 +71,11 @@ export default function CatalogHero({
 
           <Button className="h-12 w-full shrink-0 gap-2 text-label-l sm:w-[147px]">
             {filterLabel}
-            <Icon src={images.icons.chevronDown} className="h-6 w-6" />
+            <Icon
+              src={images.icons.chevronDown}
+              alt="Chevron down"
+              className="h-6 w-6"
+            />
           </Button>
         </Form>
       </div>

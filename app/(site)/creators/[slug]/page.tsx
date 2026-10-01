@@ -71,7 +71,7 @@ export default async function CreatorProfilePage({
       >
         <GridOverlay />
 
-        <div className="mx-auto flex w-full max-w-page flex-col gap-10 px-6 pt-[172px] pb-[64px] lg:px-10">
+        <div className="mx-auto flex w-full max-w-page flex-col gap-10 px-5 pt-[172px] pb-[64px] sm:px-6 md:px-0">
           <div className="flex flex-col gap-10">
             <div className="flex items-center gap-6">
               <AppImage
@@ -129,7 +129,7 @@ export default async function CreatorProfilePage({
         </div>
       </section>
 
-      <main className="mx-auto w-full max-w-page px-6 pt-[62px] pb-16 lg:px-10">
+      <main className="mx-auto w-full max-w-page px-5 pt-[62px] pb-16 sm:px-6 md:px-0">
         <FilterBar
           basePath={`/creators/${slug}`}
           categories={categories}

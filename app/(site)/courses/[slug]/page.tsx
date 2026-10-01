@@ -81,6 +81,7 @@ export default async function CourseDetailsPage({
             <li key={point} className="flex h-[26px] items-center gap-2">
               <Icon
                 src={images.icons.checkBlue}
+                alt="Checkmark"
                 className="h-6 w-6 shrink-0"
               />
               <span className="text-base text-steel-700">{point}</span>

@@ -24,21 +24,26 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ```
 app/
-  page.tsx            # Landing page
-  layout.tsx          # Root layout, fonts, metadata
-  globals.css         # Design tokens (@theme) + base styles
-  not-found.tsx       # 404 page
-  login/              # Login route (stub)
-  register/           # Signup route (stub)
+  (site)/            # Public routes
+    page.tsx         # Landing page
+    courses/         # Course catalog + detail, lessons, reviews
+    creators/        # Creator list + profile
+  (auth)/            # Login / signup routes
+  layout.tsx         # Root layout, fonts, metadata
+  globals.css        # Design tokens (@theme) + base styles
+  not-found.tsx      # 404 page
 components/
-  layout/             # Header, Footer
-  home/               # Hero, PartnerLogos, CategoryTabs, CourseCard,
-                      # GrowthSection, CreatorCTA, Testimonials
-  ui/                 # Button, Badge, Input, StatCard, AvatarStack
-data/                 # Courses, nav/footer links, categories, testimonials
+  layout/            # Header, Footer, MobileNav
+  home/              # Hero, PartnerLogos, CategoryTabs, CourseCard,
+                     # LearningPaths, GrowthSection, CreatorCTA, Testimonials
+  course/            # CourseHero, CourseTabs, EnrollCard, StickyEnroll
+  search/            # CatalogHero, FilterBar, Pagination
+  auth/              # AuthShell, LoginForm, RegisterForm
+  ui/                # Button, Badge, Input, StatCard, AvatarStack, AppImage
+data/                # Courses, nav/footer links, categories, testimonials
 public/
-  fonts/              # Local Satoshi (400/500/700)
-  images/             # Logos and design assets
+  fonts/             # Local Satoshi (400/500/700)
+  images/            # Logos and design assets
 ```
 
 ## Design system
@@ -58,5 +63,6 @@ Tokens live in `app/globals.css` under `@theme` and map directly to the Figma st
 
 ## Notes
 
-- Landing page is built as server components; per-section data is separated under `data/` for easy swapping.
-- Login and signup pages are UI placeholders (no backend/auth wired up).
+- Landing page sections are server components; per-section data is separated under `data/` for easy swapping.
+- Login and signup pages are fully built UI with client-side validation (no backend/auth wired up).
+- Course catalog, course detail, lessons, reviews and creator pages are static-data driven.

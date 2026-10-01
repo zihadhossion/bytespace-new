@@ -10,7 +10,7 @@
  *     Label L/M/S/XS   → text-label-l / text-label-m / text-label-s / text-label-xs
  */
 @theme {
-  --container-page: 1280px;
+  --container-page: 1200px;
   --container-wide: 1440px;
 
   /* Primary — Persian Blue */
@@ -109,6 +109,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 120px;
   }
 
   body {

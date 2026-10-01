@@ -61,7 +61,7 @@ function AuthCourseCard({
 
           <div className="flex items-center gap-3">
             <span className="flex items-center gap-1 rounded-full bg-steel-50 px-3 py-1.5 text-xs leading-[1.2] font-medium text-steel-700">
-              <Icon src={images.icons.level} className="h-5 w-5" />
+              <Icon src={images.icons.level} alt="Level" className="h-5 w-5" />
               Beginner
             </span>
             <div className="flex -space-x-2">
@@ -91,7 +91,7 @@ function AuthCourseCard({
 
         <div className="flex shrink-0 items-center gap-1">
           <span className="text-lg text-muted">4.5</span>
-          <Icon src={images.icons.starLime} className="h-6 w-6" />
+          <Icon src={images.icons.starLime} alt="Star" className="h-6 w-6" />
         </div>
       </div>
     </div>
@@ -101,7 +101,11 @@ function AuthCourseCard({
 function HappyStudentsCard() {
   return (
     <div className="absolute top-[620px] left-[228px] z-10 hidden h-[123px] w-[258px] rounded-2xl bg-volt-400 p-4 lg:block">
-      <Title as="p" variant="raw" className="text-base leading-6 font-medium text-steel-950">
+      <Title
+        as="p"
+        variant="raw"
+        className="text-base leading-6 font-medium text-steel-950"
+      >
         Happy Students
       </Title>
       <div className="flex items-center">
@@ -149,11 +153,19 @@ export default function AuthShell({
     <div className="relative min-h-screen overflow-hidden bg-brand-800 text-steel-50">
       <GridOverlay />
 
-      <div className="mx-auto grid w-full max-w-page grid-cols-1 items-start gap-16 px-6 pt-[120px] pb-16 lg:grid-cols-[minmax(0,621px)_minmax(0,579px)] lg:gap-0 lg:px-10">
-        <div className="relative min-h-[784px]">
+      <div className="mx-auto grid w-full max-w-page grid-cols-1 items-start gap-10 px-5 pt-[96px] pb-16 sm:px-6 md:gap-16 md:pt-[120px] lg:grid-cols-[minmax(0,621px)_minmax(0,579px)] lg:gap-0 lg:px-0">
+        <div className="relative min-h-0 lg:min-h-[784px]">
           <div className="relative z-10 w-full max-w-[475px]">
-            <Title as="p" variant="raw" className="text-subheading text-steel-50">{leftHeading}</Title>
-            <Title as="p" variant="raw" className="mt-4 text-lg text-steel-50">{leftBody}</Title>
+            <Title
+              as="p"
+              variant="raw"
+              className="text-heading text-steel-50"
+            >
+              {leftHeading}
+            </Title>
+            <Title as="p" variant="raw" className="mt-4 text-lg text-steel-50">
+              {leftBody}
+            </Title>
           </div>
 
           <AuthCourseCard
@@ -170,7 +182,7 @@ export default function AuthShell({
 
           <AppImage
             src={images.pages.authSquiggle}
-            alt=""
+            alt="Decorative squiggle shape"
             width={354}
             height={352}
             aria-hidden
@@ -178,23 +190,23 @@ export default function AuthShell({
           />
           <AppImage
             src={images.pages.authTorus}
-            alt=""
+            alt="Decorative torus ring shape"
             width={296}
             height={294}
             aria-hidden
-            className="absolute top-[200px] left-[31px] z-30 hidden h-[146px] w-[146px] lg:block"
+            className="absolute top-[200px] left-[31px] z-20 hidden h-[146px] w-[146px] lg:block"
           />
           <AppImage
             src={images.pages.authCone}
-            alt=""
+            alt="Decorative cone shape"
             width={380}
             height={378}
             aria-hidden
-            className="absolute top-[582px] left-[-23px] z-40 hidden h-[188px] w-[188px] lg:block"
+            className="absolute top-[582px] left-[-23px] z-20 hidden h-[188px] w-[188px] lg:block"
           />
         </div>
 
-        <div className="relative z-10 w-full rounded-card bg-white p-6 text-steel-950 sm:px-[63px] sm:pt-[61px] sm:pb-[39px] lg:min-h-[784px]">
+        <div className="relative z-10 w-full rounded-card bg-white p-6 text-steel-950 sm:px-[63px] sm:pt-[61px] sm:pb-10 min-h-0 lg:min-h-[784px]">
           {children}
         </div>
       </div>

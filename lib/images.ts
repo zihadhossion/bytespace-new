@@ -62,7 +62,14 @@ export const images = {
   },
   hero: {
     person: "/images/hero/person.png",
-    ornaments: "/images/hero/ornaments.png",
+    ornaments: {
+      springLime: "/images/hero/ornaments/spring-lime.png",
+      donutWhite: "/images/hero/ornaments/donut-white.png",
+      squiggleSm: "/images/hero/ornaments/squiggle-sm.png",
+      coneWhite: "/images/hero/ornaments/cone-white.png",
+      squiggleLg: "/images/hero/ornaments/squiggle-lg.png",
+      cylinderLime: "/images/hero/ornaments/cylinder-lime.png",
+    },
   },
   growth: {
     guy: "/images/growth/guy.png",
@@ -71,7 +78,15 @@ export const images = {
     squiggleB: "/images/growth/squiggle-b.png",
   },
   cta: {
-    ornaments: "/images/cta/ornaments.png",
+    ornaments: {
+      springLime: "/images/cta/ornaments/spring-lime.png",
+      coneWhite: "/images/cta/ornaments/cone-white.png",
+      donutLime: "/images/cta/ornaments/donut-lime.png",
+      squiggleSm: "/images/cta/ornaments/squiggle-sm.png",
+      coneLime: "/images/cta/ornaments/cone-lime.png",
+      squiggleLg: "/images/cta/ornaments/squiggle-lg.png",
+      cylinderWhite: "/images/cta/ornaments/cylinder-white.png",
+    },
   },
 } as const;
 

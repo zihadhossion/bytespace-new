@@ -54,7 +54,7 @@ function HappyStudentsCard({ className = "" }: { className?: string }) {
             <span className="text-[10px] leading-[15px] text-steel-400">
               4.5 (240)
             </span>
-            <Icon src={images.icons.starSm} className="h-4 w-4" />
+            <Icon src={images.icons.starSm} alt="Star" className="h-4 w-4" />
           </div>
         </div>
         <AvatarStack avatars={stackAvatars} total="2K+" size="md" />
@@ -80,7 +80,7 @@ export default function GrowthSection({ className = "" }: GrowthSectionProps) {
         </div>
       </div>
 
-      <div className="relative mx-auto w-full max-w-page px-6 py-16 md:py-[120px] lg:px-10">
+      <div className="relative mx-auto w-full max-w-page px-5 py-16 sm:px-6 md:px-0 md:py-[120px]">
         <div className="flex flex-col items-center gap-10 lg:flex-row lg:items-center lg:gap-[63px]">
           <div className="flex w-full max-w-[574px] shrink-0 flex-col gap-10">
             <Title as="h2" variant="title" className="text-title text-steel-950">
@@ -119,16 +119,15 @@ export default function GrowthSection({ className = "" }: GrowthSectionProps) {
             </div>
             <AppImage
               src={images.growth.guy}
-              alt=""
+              alt="Smiling student wearing headphones and holding a laptop"
               width={1442}
               height={1376}
-              aria-hidden
               className="absolute top-[12px] left-[-21px] z-20 w-[721px] max-w-none"
             />
             <LearningProgressCard className="absolute top-[213px] left-[345px] z-30" />
             <AppImage
               src={images.growth.squiggleA}
-              alt=""
+              alt="Decorative squiggle shape"
               width={434}
               height={432}
               aria-hidden
@@ -188,16 +187,15 @@ export default function GrowthSection({ className = "" }: GrowthSectionProps) {
 
             <AppImage
               src={images.growth.woman}
-              alt=""
+              alt="Smiling student wearing a headset and holding a tablet"
               width={1158}
               height={1488}
-              aria-hidden
               className="absolute top-0 left-[7px] z-20 w-[579px] max-w-none"
             />
             <HappyStudentsCard className="absolute top-[413px] left-[283px] z-30" />
             <AppImage
               src={images.growth.squiggleB}
-              alt=""
+              alt="Decorative squiggle shape"
               width={434}
               height={432}
               aria-hidden
@@ -224,6 +222,7 @@ export default function GrowthSection({ className = "" }: GrowthSectionProps) {
                 <li key={benefit} className="flex items-center gap-2">
                   <Icon
                     src={images.icons.check}
+                    alt="Checkmark"
                     className="h-6 w-6 shrink-0"
                   />
                   <span className="text-lg leading-[1.2] font-medium text-steel-950">

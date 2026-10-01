@@ -157,17 +157,27 @@ export default function MobileNav({ tone = "light" }: MobileNavProps) {
           aria-label="Mobile primary"
         >
           <ul className="flex flex-col">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  onClick={close}
-                  className={`block border-b py-4 text-lg transition-opacity hover:opacity-70 ${border}`}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
+            {navLinks.map((link) => {
+              const isActive =
+                link.href === "/"
+                  ? pathname === "/"
+                  : pathname.startsWith(link.href);
+
+              return (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    onClick={close}
+                    aria-current={isActive ? "page" : undefined}
+                    className={`block border-b py-4 text-lg transition-opacity hover:opacity-70 ${
+                      isActive ? "font-medium" : ""
+                    } ${border}`}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </nav>
 
