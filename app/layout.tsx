@@ -47,7 +47,12 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${poppins.variable} ${satoshi.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <noscript>
+          <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
+      </body>
     </html>
   );
 }
