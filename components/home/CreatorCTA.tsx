@@ -27,7 +27,8 @@ export default function CreatorCTA({ className = "" }: CreatorCTAProps) {
           width={505}
           height={537}
           aria-hidden
-          className="absolute top-[-98px] left-[-56px] w-[252px] max-w-none"
+          className="absolute animate-float top-[-98px] left-[-56px] w-[252px] max-w-none"
+          style={{ animationDelay: "0s" }}
         />
 
         <AppImage
@@ -36,7 +37,8 @@ export default function CreatorCTA({ className = "" }: CreatorCTAProps) {
           width={230}
           height={245}
           aria-hidden
-          className="absolute top-[34px] left-[212px] w-[115px] max-w-none"
+          className="absolute animate-float top-[34px] left-[212px] w-[115px] max-w-none"
+          style={{ animationDelay: "0.7s" }}
         />
 
         <AppImage
@@ -45,7 +47,8 @@ export default function CreatorCTA({ className = "" }: CreatorCTAProps) {
           width={256}
           height={305}
           aria-hidden
-          className="absolute top-[242px] left-[-12px] w-[128px] max-w-none"
+          className="absolute animate-float top-[242px] left-[-12px] w-[128px] max-w-none"
+          style={{ animationDelay: "1.4s" }}
         />
 
         <AppImage
@@ -54,7 +57,8 @@ export default function CreatorCTA({ className = "" }: CreatorCTAProps) {
           width={477}
           height={437}
           aria-hidden
-          className="absolute top-[358px] left-[71px] w-[238px] max-w-none"
+          className="absolute animate-float top-[358px] left-[71px] w-[238px] max-w-none"
+          style={{ animationDelay: "2.1s" }}
         />
 
         <AppImage
@@ -63,7 +67,8 @@ export default function CreatorCTA({ className = "" }: CreatorCTAProps) {
           width={250}
           height={275}
           aria-hidden
-          className="absolute top-[22px] left-[1107px] w-[125px] max-w-none"
+          className="absolute animate-float top-[22px] left-[1107px] w-[125px] max-w-none"
+          style={{ animationDelay: "2.8s" }}
         />
 
         <AppImage
@@ -72,7 +77,8 @@ export default function CreatorCTA({ className = "" }: CreatorCTAProps) {
           width={547}
           height={600}
           aria-hidden
-          className="absolute top-[40px] left-[1272px] w-[274px] max-w-none"
+          className="absolute animate-float top-[40px] left-[1272px] w-[274px] max-w-none"
+          style={{ animationDelay: "3.5s" }}
         />
 
         <AppImage
@@ -81,7 +87,8 @@ export default function CreatorCTA({ className = "" }: CreatorCTAProps) {
           width={381}
           height={499}
           aria-hidden
-          className="absolute top-[328px] left-[1181px] w-[190px] max-w-none"
+          className="absolute animate-float top-[328px] left-[1181px] w-[190px] max-w-none"
+          style={{ animationDelay: "4.2s" }}
         />
       </div>
 

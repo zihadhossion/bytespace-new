@@ -7,6 +7,7 @@ import LearningPaths from "@/components/home/LearningPaths";
 import PartnerLogos from "@/components/home/PartnerLogos";
 import Testimonials from "@/components/home/Testimonials";
 import GridOverlay from "@/components/ui/GridOverlay";
+import Reveal from "@/components/ui/Reveal";
 import Title from "@/components/ui/Title";
 import { courses } from "@/data/courses";
 
@@ -25,7 +26,7 @@ export default function Home() {
           id="featured-courses"
           className="mx-auto w-full max-w-page px-5 pt-12 sm:px-6 md:px-0 md:pt-[72px]"
         >
-          <div className="mx-auto flex max-w-[917px] flex-col items-center gap-4 text-center">
+          <Reveal className="mx-auto flex max-w-[917px] flex-col items-center gap-4 text-center">
             <Title as="h2" variant="title" className="text-title text-ink">
               Discover Your Passion,
               <br />
@@ -41,21 +42,33 @@ export default function Home() {
               from technology to the arts, and make a difference in your career
               and life.
             </Title>
-          </div>
+          </Reveal>
 
-          <CategoryTabs className="mt-8 md:mt-[42px]" />
+          <Reveal className="mt-8 md:mt-[42px]" delay={0.1}>
+            <CategoryTabs />
+          </Reveal>
 
           <div className="mt-12 grid gap-10 sm:grid-cols-2 md:mt-[77px] lg:grid-cols-3">
-            {courses.map((course) => (
-              <CourseCard key={course.id} course={course} />
+            {courses.map((course, index) => (
+              <Reveal key={course.id} delay={(index % 3) * 0.08}>
+                <CourseCard course={course} />
+              </Reveal>
             ))}
           </div>
         </section>
 
-        <LearningPaths />
-        <GrowthSection />
-        <CreatorCTA />
-        <Testimonials />
+        <Reveal>
+          <LearningPaths />
+        </Reveal>
+        <Reveal>
+          <GrowthSection />
+        </Reveal>
+        <Reveal>
+          <CreatorCTA />
+        </Reveal>
+        <Reveal>
+          <Testimonials />
+        </Reveal>
       </main>
     </>
   );

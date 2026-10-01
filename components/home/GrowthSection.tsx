@@ -1,5 +1,6 @@
 import AppImage from "@/components/ui/AppImage";
 import AvatarStack from "@/components/ui/AvatarStack";
+import CountUp from "@/components/ui/CountUp";
 import Glow from "@/components/ui/Glow";
 import Icon from "@/components/ui/Icon";
 import Title from "@/components/ui/Title";
@@ -30,7 +31,7 @@ function LearningProgressCard({ className = "" }: { className?: string }) {
         55%
       </Title>
       <div className="mt-2 h-2 w-full rounded-full bg-[#f6f6f6]">
-        <div className="h-full w-[56%] rounded-full bg-volt-400" />
+        <div className="progress-scroll h-full w-[56%] rounded-full bg-volt-400" />
       </div>
     </div>
   );
@@ -72,11 +73,11 @@ export default function GrowthSection({ className = "" }: GrowthSectionProps) {
     >
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="absolute top-0 left-1/2 h-full w-[1440px] -translate-x-1/2">
-          <Glow color="volt" className="top-[-466px] left-[-152px] h-[1137px] w-[1137px]" />
-          <Glow color="brand" className="top-[-458px] left-[811px] h-[1137px] w-[1137px]" />
-          <Glow color="brand" className="top-[183px] left-[-508px] h-[1137px] w-[1137px]" />
-          <Glow color="brand" className="top-[788px] left-[722px] h-[1137px] w-[1137px]" />
-          <Glow color="volt" className="top-[946px] left-[-287px] h-[672px] w-[672px]" />
+          <Glow color="volt" className="glow-parallax top-[-466px] left-[-152px] h-[1137px] w-[1137px]" />
+          <Glow color="brand" className="glow-parallax top-[-458px] left-[811px] h-[1137px] w-[1137px]" />
+          <Glow color="brand" className="glow-parallax top-[183px] left-[-508px] h-[1137px] w-[1137px]" />
+          <Glow color="brand" className="glow-parallax top-[788px] left-[722px] h-[1137px] w-[1137px]" />
+          <Glow color="volt" className="glow-parallax top-[946px] left-[-287px] h-[672px] w-[672px]" />
         </div>
       </div>
 
@@ -103,7 +104,7 @@ export default function GrowthSection({ className = "" }: GrowthSectionProps) {
               {platformStats.map((stat) => (
                 <div key={stat.label} className="flex flex-col">
                   <span className="font-heading text-[36px] leading-[44px] font-medium tracking-[-0.01em] text-brand-800">
-                    {stat.value}
+                    <CountUp value={stat.value} />
                   </span>
                   <span className="text-lg text-steel-700">{stat.label}</span>
                 </div>
@@ -160,7 +161,7 @@ export default function GrowthSection({ className = "" }: GrowthSectionProps) {
                 </span>
               </div>
               <div className="h-2 w-full rounded-full bg-white">
-                <div className="h-full w-[56%] rounded-full bg-volt-400" />
+                <div className="progress-scroll h-full w-[56%] rounded-full bg-volt-400" />
               </div>
             </div>
 

@@ -44,7 +44,7 @@ export default function Hero({ className = "" }: HeroProps) {
             55%
           </Title>
           <div className="mt-2 h-2 w-full rounded-full bg-[#f6f6f6]">
-            <div className="h-full w-[56%] rounded-full bg-volt-400" />
+            <div className="progress-fill h-full w-[56%] rounded-full bg-volt-400" />
           </div>
         </div>
 
@@ -73,7 +73,8 @@ export default function Hero({ className = "" }: HeroProps) {
           width={505}
           height={537}
           aria-hidden
-          className="absolute top-[165px] left-[-56px] w-[252.5px] max-w-none"
+          className="absolute top-[165px] left-[-56px] w-[252.5px] max-w-none animate-float"
+          style={{ animationDelay: "0s" }}
         />
 
         <AppImage
@@ -82,7 +83,8 @@ export default function Hero({ className = "" }: HeroProps) {
           width={230}
           height={244}
           aria-hidden
-          className="absolute top-[386px] left-[218px] w-[115px] max-w-none"
+          className="absolute top-[386px] left-[218px] w-[115px] max-w-none animate-float"
+          style={{ animationDelay: "0.8s" }}
         />
 
         <AppImage
@@ -91,7 +93,8 @@ export default function Hero({ className = "" }: HeroProps) {
           width={477}
           height={437}
           aria-hidden
-          className="absolute top-[621px] left-[69px] w-[238.5px] max-w-none"
+          className="absolute top-[621px] left-[69px] w-[238.5px] max-w-none animate-float"
+          style={{ animationDelay: "1.6s" }}
         />
 
         <AppImage
@@ -100,7 +103,8 @@ export default function Hero({ className = "" }: HeroProps) {
           width={250}
           height={275}
           aria-hidden
-          className="absolute top-[366px] left-[1133px] w-[125px] max-w-none"
+          className="absolute top-[366px] left-[1133px] w-[125px] max-w-none animate-float"
+          style={{ animationDelay: "2.4s" }}
         />
 
         <AppImage
@@ -109,7 +113,8 @@ export default function Hero({ className = "" }: HeroProps) {
           width={382}
           height={500}
           aria-hidden
-          className="absolute top-[590px] left-[1198px] w-[191px] max-w-none"
+          className="absolute top-[590px] left-[1198px] w-[191px] max-w-none animate-float"
+          style={{ animationDelay: "3.2s" }}
         />
 
         <AppImage
@@ -118,7 +123,8 @@ export default function Hero({ className = "" }: HeroProps) {
           width={548}
           height={599}
           aria-hidden
-          className="absolute top-[136px] left-[1278px] w-[274px] max-w-none"
+          className="absolute top-[136px] left-[1278px] w-[274px] max-w-none animate-float"
+          style={{ animationDelay: "4s" }}
         />
 
         <div className="absolute top-[519px] left-[404px] w-[208px] rounded-2xl bg-white p-4 text-steel-950">
@@ -137,12 +143,17 @@ export default function Hero({ className = "" }: HeroProps) {
         <Title
           as="h1"
           variant="display"
-          className="max-w-[935px] text-display text-white"
+          className="max-w-[935px] animate-slide-up text-display text-white"
         >
           Get Access to Hundreds Courses Available
         </Title>
 
-        <Title as="p" variant="raw" className="mt-8 text-lg text-steel-100">
+        <Title
+          as="p"
+          variant="raw"
+          className="mt-8 animate-fade-up text-lg text-steel-100"
+          style={{ animationDelay: "80ms" }}
+        >
           Unlock your creativity, gain valuable knowledge, and grow your
           business with our wide range of courses.
         </Title>
@@ -150,7 +161,8 @@ export default function Hero({ className = "" }: HeroProps) {
         <Form
           action="/courses"
           role="search"
-          className="mt-10 flex w-full flex-col items-stretch justify-center gap-3 sm:mt-[60px] sm:flex-row sm:items-start sm:gap-4"
+          className="mt-10 flex w-full animate-fade-up flex-col items-stretch justify-center gap-3 sm:mt-[60px] sm:flex-row sm:items-start sm:gap-4"
+          style={{ animationDelay: "160ms" }}
         >
           <div className="mx-auto flex h-[52px] w-full max-w-[461px] items-center gap-2 rounded-[24px] bg-white px-6 sm:mx-0">
             <Button
@@ -183,7 +195,8 @@ export default function Hero({ className = "" }: HeroProps) {
           alt="Smiling student wearing headphones and holding a laptop"
           width={1444}
           height={1378}
-          className="mt-12 w-full max-w-[578px] xl:hidden"
+          className="mt-12 w-full max-w-[578px] animate-fade-up xl:hidden"
+          style={{ animationDelay: "240ms" }}
         />
       </div>
     </section>
