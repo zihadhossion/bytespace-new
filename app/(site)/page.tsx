@@ -1,20 +1,21 @@
-import CategoryTabs from "@/components/home/CategoryTabs";
-import CourseCard from "@/components/home/CourseCard";
+import CourseCard from "@/components/course/CourseCard";
 import CreatorCTA from "@/components/home/CreatorCTA";
 import GrowthSection from "@/components/home/GrowthSection";
 import Hero from "@/components/home/Hero";
 import LearningPaths from "@/components/home/LearningPaths";
 import PartnerLogos from "@/components/home/PartnerLogos";
 import Testimonials from "@/components/home/Testimonials";
+import CategoryTabs from "@/components/search/CategoryTabs";
 import GridOverlay from "@/components/ui/GridOverlay";
 import Reveal from "@/components/ui/Reveal";
 import Title from "@/components/ui/Title";
 import { courses } from "@/data/courses";
+import { container } from "@/lib/utils";
 
 export default function Home() {
   return (
     <>
-      <div className="relative bg-brand-800 pt-[72px] md:pt-[120px]">
+      <div className="relative bg-brand-800 pt-[var(--header-h)] md:pt-[var(--header-h-lg)]">
         <GridOverlay />
         <Hero />
       </div>
@@ -24,10 +25,10 @@ export default function Home() {
 
         <section
           id="featured-courses"
-          className="mx-auto w-full max-w-page px-5 pt-12 sm:px-6 md:px-0 md:pt-[72px]"
+          className={`${container} pt-12 md:pt-[72px]`}
         >
           <Reveal className="mx-auto flex max-w-[917px] flex-col items-center gap-4 text-center">
-            <Title as="h2" variant="title" className="text-title text-ink">
+            <Title as="h2" variant="title" className="text-ink">
               Discover Your Passion,
               <br />
               Build Your Skills
@@ -45,7 +46,14 @@ export default function Home() {
           </Reveal>
 
           <Reveal className="mt-8 md:mt-[42px]" delay={0.1}>
-            <CategoryTabs />
+            <CategoryTabs
+              active="Featured"
+              hrefFor={(tab) =>
+                tab === "Featured"
+                  ? "/courses"
+                  : `/courses?${new URLSearchParams({ category: tab })}`
+              }
+            />
           </Reveal>
 
           <div className="mt-12 grid gap-10 sm:grid-cols-2 md:mt-[77px] lg:grid-cols-3">
@@ -57,18 +65,14 @@ export default function Home() {
           </div>
         </section>
 
-        <Reveal>
-          <LearningPaths />
-        </Reveal>
+        <LearningPaths />
         <Reveal>
           <GrowthSection />
         </Reveal>
         <Reveal>
           <CreatorCTA />
         </Reveal>
-        <Reveal>
-          <Testimonials />
-        </Reveal>
+        <Testimonials />
       </main>
     </>
   );

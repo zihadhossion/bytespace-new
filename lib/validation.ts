@@ -2,7 +2,7 @@ export type FieldErrors<K extends string = string> = Partial<
   Record<K, string | null>
 >;
 
-export const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export function validateRequired(
   value: string,

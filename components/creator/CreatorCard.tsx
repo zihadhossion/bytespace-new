@@ -2,8 +2,9 @@ import Link from "next/link";
 
 import AppImage from "@/components/ui/AppImage";
 import AvatarStack from "@/components/ui/AvatarStack";
+import CardShell from "@/components/ui/CardShell";
 import GridOverlay from "@/components/ui/GridOverlay";
-import Icon from "@/components/ui/Icon";
+import MetaChip from "@/components/ui/MetaChip";
 import Title from "@/components/ui/Title";
 import { cardAvatars } from "@/data/avatars";
 import type { Creator } from "@/data/creator";
@@ -21,7 +22,7 @@ export default function CreatorCard({ creator }: CreatorCardProps) {
       href={`/creators/${creator.slug}`}
       className="group block cursor-pointer"
     >
-      <article className="rounded-card border border-steel-200 bg-white p-4 pb-[21px] transition group-hover:border-steel-300 group-hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)]">
+      <CardShell>
         <div className="relative">
           <div className="relative h-[140px] w-full overflow-hidden rounded-xl bg-brand-800">
             <GridOverlay />
@@ -40,7 +41,7 @@ export default function CreatorCard({ creator }: CreatorCardProps) {
             <Title
               as="h3"
               variant="subheading"
-              className="truncate font-heading text-subheading font-semibold text-black"
+              className="truncate text-black"
             >
               {creator.name}
             </Title>
@@ -54,14 +55,12 @@ export default function CreatorCard({ creator }: CreatorCardProps) {
           </div>
 
           <div className="flex items-center gap-3">
-            <span className="flex items-center gap-1 rounded-full bg-steel-50 px-3 py-1.5 text-xs leading-[1.2] font-medium text-steel-700">
-              <Icon src={images.icons.category} alt="Category" className="h-5 w-5" />
+            <MetaChip icon={images.icons.category} iconAlt="Category">
               {courseCount} {courseCount === 1 ? "Course" : "Courses"}
-            </span>
-            <span className="flex items-center gap-1 rounded-full bg-steel-50 px-3 py-1.5 text-xs leading-[1.2] font-medium text-steel-700">
-              <Icon src={images.icons.heroUsers} alt="Users" className="h-5 w-5" />
+            </MetaChip>
+            <MetaChip icon={images.icons.heroUsers} iconAlt="Users">
               {creator.followers} Followers
-            </span>
+            </MetaChip>
           </div>
 
           <div className="flex items-center justify-between">
@@ -76,7 +75,7 @@ export default function CreatorCard({ creator }: CreatorCardProps) {
             </span>
           </div>
         </div>
-      </article>
+      </CardShell>
     </Link>
   );
 }

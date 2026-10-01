@@ -1,17 +1,14 @@
 "use client";
 
-import Link from "next/link";
-import { useState } from "react";
 import AuthField from "@/components/auth/AuthField";
+import AuthForm from "@/components/auth/AuthForm";
+import AuthFormFooter from "@/components/auth/AuthFormFooter";
+import AuthFormHeader from "@/components/auth/AuthFormHeader";
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
-import Title from "@/components/ui/Title";
 import { images } from "@/lib/images";
-import {
-  validateEmail,
-  validateRequired,
-  type FieldErrors,
-} from "@/lib/validation";
+import { useFormValidation } from "@/lib/useFormValidation";
+import { validateEmail, validateRequired } from "@/lib/validation";
 
 type LoginFields = "email" | "password";
 
@@ -19,54 +16,16 @@ const socialButtonClassName =
   " w-full min-h-[56px] max-w-[56px] lg:min-h-[72px] lg:max-w-[72px] rounded-2xl lg:rounded-3xl border-[#d1d1d1] bg-white hover:border-[#d1d1d1]";
 
 export default function LoginForm() {
-  const [errors, setErrors] = useState<FieldErrors<LoginFields>>({});
-
-  const validateField = (name: LoginFields, value: string) =>
-    name === "email"
-      ? validateEmail(value)
-      : validateRequired(value, "Password");
-
-  const handleChange = (event: React.ChangeEvent<HTMLFormElement>) => {
-    const target = event.target;
-    if (!(target instanceof HTMLInputElement)) return;
-    const { name, value } = target;
-    if (!(name in errors)) return;
-    setErrors((prev) => ({
-      ...prev,
-      [name]: validateField(name as LoginFields, value),
-    }));
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const next: FieldErrors<LoginFields> = {
-      email: validateEmail(String(data.get("email") ?? "")),
-      password: validateRequired(
-        String(data.get("password") ?? ""),
-        "Password",
-      ),
-    };
-    setErrors({
-      email: next.email ?? null,
-      password: next.password ?? null,
-    });
-  };
+  const { errors, handleChange, handleSubmit } = useFormValidation<LoginFields>(
+    {
+      email: validateEmail,
+      password: (value) => validateRequired(value, "Password"),
+    },
+  );
 
   return (
-    <form
-      className="flex flex-col"
-      noValidate
-      onChange={handleChange}
-      onSubmit={handleSubmit}
-    >
-      <Title as="p" variant="raw" className="text-lg text-brand-800">
-        Sign In
-      </Title>
-
-      <Title as="h1" variant="title" className="text-title text-steel-950">
-        Welcome Back
-      </Title>
+    <AuthForm onChange={handleChange} onSubmit={handleSubmit}>
+      <AuthFormHeader eyebrow="Sign In" heading="Welcome Back" />
 
       <div className="mt-10 flex flex-col gap-6">
         <AuthField
@@ -131,16 +90,13 @@ export default function LoginForm() {
         </Button>
       </div>
 
-      <Title
-        as="p"
-        variant="raw"
+      <AuthFormFooter
+        titleVariant="raw"
         className="mt-12 flex justify-center gap-1 text-base text-[#888888] md:mt-[73px]"
-      >
-        New user?
-        <Link href="/register" className="text-brand-800 hover:underline">
-          Create an account
-        </Link>
-      </Title>
-    </form>
+        prompt="New user?"
+        linkLabel="Create an account"
+        href="/register"
+      />
+    </AuthForm>
   );
 }

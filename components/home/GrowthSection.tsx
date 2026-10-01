@@ -1,67 +1,17 @@
+import CourseCard from "@/components/course/CourseCard";
 import AppImage from "@/components/ui/AppImage";
-import AvatarStack from "@/components/ui/AvatarStack";
 import CountUp from "@/components/ui/CountUp";
 import Glow from "@/components/ui/Glow";
 import Icon from "@/components/ui/Icon";
 import Title from "@/components/ui/Title";
-import { creatorBenefits, platformStats } from "@/data/categories";
-import { stackAvatars } from "@/data/avatars";
+import { HappyStudentsCard, LearningProgressCard } from "@/components/ui/StatCards";
 import { courses } from "@/data/courses";
-
-import CourseCard from "./CourseCard";
+import { creatorBenefits, platformStats } from "@/data/growth";
 import { images } from "@/lib/images";
+import { container } from "@/lib/utils";
 
 interface GrowthSectionProps {
   className?: string;
-}
-
-function LearningProgressCard({ className = "" }: { className?: string }) {
-  return (
-    <div
-      className={`w-[232px] rounded-2xl bg-white p-4 text-steel-950 ${className}`}
-    >
-      <Title as="p" variant="raw" className="text-sm leading-[24px] font-medium">
-        Learning Progress
-      </Title>
-      <Title
-        as="p"
-        variant="raw"
-        className="mt-2 font-heading text-[48px] leading-[1.2] font-semibold tracking-[-0.01em]"
-      >
-        55%
-      </Title>
-      <div className="mt-2 h-2 w-full rounded-full bg-[#f6f6f6]">
-        <div className="progress-scroll h-full w-[56%] rounded-full bg-volt-400" />
-      </div>
-    </div>
-  );
-}
-
-function HappyStudentsCard({ className = "" }: { className?: string }) {
-  return (
-    <div
-      className={`w-[258px] rounded-2xl bg-white p-4 text-steel-950 ${className}`}
-    >
-      <div className="flex flex-col gap-2">
-        <div>
-          <Title
-            as="p"
-            variant="raw"
-            className="text-base leading-[24px] font-medium"
-          >
-            Happy Students
-          </Title>
-          <div className="flex items-center gap-1">
-            <span className="text-[10px] leading-[15px] text-steel-400">
-              4.5 (240)
-            </span>
-            <Icon src={images.icons.starSm} alt="Star" className="h-4 w-4" />
-          </div>
-        </div>
-        <AvatarStack avatars={stackAvatars} total="2K+" size="md" />
-      </div>
-    </div>
-  );
 }
 
 export default function GrowthSection({ className = "" }: GrowthSectionProps) {
@@ -81,10 +31,10 @@ export default function GrowthSection({ className = "" }: GrowthSectionProps) {
         </div>
       </div>
 
-      <div className="relative mx-auto w-full max-w-page px-5 py-16 sm:px-6 md:px-0 md:py-[120px]">
+      <div className={`relative ${container} py-16 md:py-[120px]`}>
         <div className="flex flex-col items-center gap-10 lg:flex-row lg:items-center lg:gap-[63px]">
           <div className="flex w-full max-w-[574px] shrink-0 flex-col gap-10">
-            <Title as="h2" variant="title" className="text-title text-steel-950">
+            <Title as="h2" variant="title">
               Your Path to Professional
               <br />
               Growth Starts Here!
@@ -125,7 +75,11 @@ export default function GrowthSection({ className = "" }: GrowthSectionProps) {
               height={1376}
               className="absolute top-[12px] left-[-21px] z-20 w-[721px] max-w-none"
             />
-            <LearningProgressCard className="absolute top-[213px] left-[345px] z-30" />
+            <LearningProgressCard
+              className="w-[232px] rounded-2xl bg-white p-4 text-steel-950 absolute top-[213px] left-[345px] z-30"
+              labelClassName="text-sm leading-[24px] font-medium"
+              barClassName="progress-scroll"
+            />
             <AppImage
               src={images.growth.squiggleA}
               alt="Decorative squiggle shape"
@@ -193,7 +147,12 @@ export default function GrowthSection({ className = "" }: GrowthSectionProps) {
               height={1488}
               className="absolute top-0 left-[7px] z-20 w-[579px] max-w-none"
             />
-            <HappyStudentsCard className="absolute top-[413px] left-[283px] z-30" />
+            <HappyStudentsCard
+              className="w-[258px] rounded-2xl bg-white p-4 text-steel-950 absolute top-[413px] left-[283px] z-30"
+              labelClassName="text-base leading-[24px] font-medium"
+              rowClassName="flex items-center gap-1"
+              valueClassName="text-[10px] leading-[15px] text-steel-400"
+            />
             <AppImage
               src={images.growth.squiggleB}
               alt="Decorative squiggle shape"
@@ -205,7 +164,7 @@ export default function GrowthSection({ className = "" }: GrowthSectionProps) {
           </div>
 
           <div className="flex w-full max-w-[580px] shrink-0 flex-col gap-10">
-            <Title as="h2" variant="title" className="text-title text-steel-950">
+            <Title as="h2" variant="title">
               Create &amp; Manage
               <br />
               Courses Easily.

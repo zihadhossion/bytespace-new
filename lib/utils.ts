@@ -40,3 +40,9 @@ const twMerge = extendTailwindMerge({
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(...inputs));
 }
+
+export const container =
+  "mx-auto w-full max-w-page px-5 sm:px-6 md:px-0";
+
+export const inputBase =
+  "text-lg text-steel-950 placeholder:text-steel-400 focus:outline-none";

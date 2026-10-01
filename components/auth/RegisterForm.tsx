@@ -1,69 +1,33 @@
 "use client";
 
-import Link from "next/link";
-import { useState } from "react";
-
 import AuthField from "@/components/auth/AuthField";
+import AuthForm from "@/components/auth/AuthForm";
+import AuthFormFooter from "@/components/auth/AuthFormFooter";
+import AuthFormHeader from "@/components/auth/AuthFormHeader";
 import Button from "@/components/ui/Button";
-import Title from "@/components/ui/Title";
+import { useFormValidation } from "@/lib/useFormValidation";
 import {
   validateEmail,
   validateMinLength,
   validateRequired,
-  type FieldErrors,
 } from "@/lib/validation";
 
 type RegisterFields = "fullName" | "email" | "password";
 
-function validateField(name: RegisterFields, value: string): string | null {
-  switch (name) {
-    case "fullName":
-      return validateRequired(value, "Full name");
-    case "email":
-      return validateEmail(value);
-    case "password":
-      return validateMinLength(value, 8, "Password");
-  }
-}
-
 export default function RegisterForm() {
-  const [errors, setErrors] = useState<FieldErrors<RegisterFields>>({});
-
-  const handleChange = (event: React.ChangeEvent<HTMLFormElement>) => {
-    const target = event.target;
-    if (!(target instanceof HTMLInputElement)) return;
-    const { name, value } = target;
-    if (!(name in errors)) return;
-    setErrors((prev) => ({
-      ...prev,
-      [name]: validateField(name as RegisterFields, value),
-    }));
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    setErrors({
-      fullName: validateField("fullName", String(data.get("fullName") ?? "")),
-      email: validateField("email", String(data.get("email") ?? "")),
-      password: validateField("password", String(data.get("password") ?? "")),
+  const { errors, handleChange, handleSubmit } =
+    useFormValidation<RegisterFields>({
+      fullName: (value) => validateRequired(value, "Full name"),
+      email: validateEmail,
+      password: (value) => validateMinLength(value, 8, "Password"),
     });
-  };
 
   return (
-    <form
-      className="flex flex-col"
-      noValidate
-      onChange={handleChange}
-      onSubmit={handleSubmit}
-    >
-      <Title as="p" variant="raw" className="text-lg text-brand-800">
-        Create an Account
-      </Title>
-
-      <Title as="h1" variant="title" className="text-title text-steel-950">
-        Welcome to ByteSpace
-      </Title>
+    <AuthForm onChange={handleChange} onSubmit={handleSubmit}>
+      <AuthFormHeader
+        eyebrow="Create an Account"
+        heading="Welcome to ByteSpace"
+      />
 
       <div className="mt-10 flex flex-col gap-6">
         <AuthField
@@ -107,16 +71,13 @@ export default function RegisterForm() {
         </Button>
       </div>
 
-      <Title
-        as="p"
-        variant="base"
+      <AuthFormFooter
+        titleVariant="base"
         className="mt-12 flex justify-center gap-1 text-base text-steel-700 md:mt-[122px]"
-      >
-        Already have an account?
-        <Link href="/login" className="text-brand-800 hover:underline">
-          Login
-        </Link>
-      </Title>
-    </form>
+        prompt="Already have an account?"
+        linkLabel="Login"
+        href="/login"
+      />
+    </AuthForm>
   );
 }

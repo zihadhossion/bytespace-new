@@ -1,16 +1,10 @@
-export interface Category {
-  label: string;
-  href: string;
-  icon?: string;
-}
-
-export const featuredCategories: Category[] = [
-  { label: "Design", href: "/categories/design" },
-  { label: "Development", href: "/categories/development" },
-  { label: "IT & Software", href: "/categories/it-software" },
-  { label: "Business", href: "/categories/business" },
-  { label: "Marketing", href: "/categories/marketing" },
-  { label: "Photography", href: "/categories/photography" },
+export const featuredCategories: string[] = [
+  "Design",
+  "Development",
+  "IT & Software",
+  "Business",
+  "Marketing",
+  "Photography",
 ];
 
 export const categoryTabs: string[] = [
@@ -32,17 +26,4 @@ export const categoryTabs: string[] = [
   "Web Development",
   "Data Science",
   "Cooking",
-];
-
-export const platformStats = [
-  { value: "12K", label: "Students" },
-  { value: "70+", label: "Courses" },
-  { value: "16", label: "Creators" },
-];
-
-export const creatorBenefits: string[] = [
-  "Share Your Expertise",
-  "Monetize Your Passion",
-  "Flexibility and Autonomy",
-  "Build a Community",
 ];

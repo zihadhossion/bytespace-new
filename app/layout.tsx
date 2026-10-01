@@ -70,7 +70,11 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${poppins.variable} ${satoshi.variable}`}>
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={`${poppins.variable} ${satoshi.variable}`}
+    >
       <body>
         {children}
         <noscript>

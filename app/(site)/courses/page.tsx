@@ -1,25 +1,24 @@
 import type { Metadata } from "next";
 
-import CategoryTabs from "@/components/home/CategoryTabs";
-import CourseCard from "@/components/home/CourseCard";
+import CourseCard from "@/components/course/CourseCard";
 import CatalogHero from "@/components/search/CatalogHero";
+import CategoryTabs from "@/components/search/CategoryTabs";
+import CatalogList from "@/components/search/CatalogList";
 import FilterBar from "@/components/search/FilterBar";
-import Pagination from "@/components/search/Pagination";
-import Button from "@/components/ui/Button";
-import Title from "@/components/ui/Title";
 import { allCourses } from "@/data/courses";
 import {
   COURSES_PER_PAGE,
-  type CourseQuery,
   type SearchParams,
   courseDefaults,
+  createHref,
   filterCourses,
-  hrefWith,
   paginate,
   parseCourseQuery,
+  pickFormParams,
   sortCourses,
   uniqueCategories,
 } from "@/lib/catalog";
+import { container } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Browse Courses",
@@ -32,9 +31,7 @@ interface CoursesPageProps {
 
 const formKeys = ["category", "level", "rating", "price", "sort"] as const;
 
-function buildCourseHref(query: CourseQuery, changes: Partial<CourseQuery>) {
-  return hrefWith("/courses", query, courseDefaults, changes);
-}
+const buildCourseHref = createHref("/courses", courseDefaults);
 
 export default async function CoursesPage({ searchParams }: CoursesPageProps) {
   const query = parseCourseQuery(await searchParams);
@@ -48,9 +45,7 @@ export default async function CoursesPage({ searchParams }: CoursesPageProps) {
   );
 
   const categories = uniqueCategories(allCourses);
-  const formParams = Object.fromEntries(
-    formKeys.filter((key) => query[key]).map((key) => [key, query[key]]),
-  );
+  const formParams = pickFormParams(query, formKeys);
 
   return (
     <>
@@ -63,7 +58,7 @@ export default async function CoursesPage({ searchParams }: CoursesPageProps) {
         formParams={formParams}
       />
 
-      <main className="mx-auto w-full max-w-page px-5 pt-[72px] pb-16 sm:px-6 md:px-0">
+      <main className={`${container} pt-[72px] pb-16`}>
         <FilterBar basePath="/courses" categories={categories} query={query} />
 
         <CategoryTabs
@@ -79,39 +74,15 @@ export default async function CoursesPage({ searchParams }: CoursesPageProps) {
           className="mt-8"
         />
 
-        {items.length === 0 ? (
-          <div className="mt-12 flex flex-col items-center gap-4 py-16 text-center md:mt-[77px]">
-            <Title
-              as="h2"
-              variant="heading"
-              className="font-heading text-heading font-semibold text-steel-950"
-            >
-              No courses found
-            </Title>
-            <Title as="p" variant="raw" className="text-lg text-steel-400">
-              Try a different search or clear your filters.
-            </Title>
-            <Button
-              href="/courses"
-              size="none"
-              className="mt-2 px-6 py-3 text-label-m"
-            >
-              Clear all filters
-            </Button>
-          </div>
-        ) : (
-          <div className="mt-12 grid gap-10 sm:grid-cols-2 md:mt-[77px] lg:grid-cols-3">
-            {items.map((course) => (
-              <CourseCard key={course.id} course={course} variant="grid" />
-            ))}
-          </div>
-        )}
-
-        <Pagination
+        <CatalogList
+          items={items}
+          itemKey={(course) => course.id}
+          renderItem={(course) => <CourseCard course={course} variant="grid" />}
+          emptyTitle="No courses found"
+          clearHref="/courses"
           page={page}
           totalPages={totalPages}
           hrefFor={(nextPage) => buildCourseHref(query, { page: nextPage })}
-          className="mt-16 flex justify-center"
         />
       </main>
     </>

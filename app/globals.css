@@ -1,14 +1,5 @@
 @import "tailwindcss";
 
-/*
- * Tokens from Figma "Style Guide" page:
- * - Grid: 12 columns, 120px margin, 40px gutter → 1200px content (container-page)
- * - Neutral = Shuttle Gray, Primary = Persian Blue, Secondary = Electric Lime
- * - Typography mapping (Figma → token):
- *     Heading L/M/S/XS → text-display / text-title / text-heading / text-subheading
- *     Body L/M/S/XS    → text-lg / text-base / text-sm / text-xs
- *     Label L/M/S/XS   → text-label-l / text-label-m / text-label-s / text-label-xs
- */
 @theme {
   --container-page: 1200px;
   --container-wide: 1440px;
@@ -123,6 +114,7 @@
       opacity: 0;
       transform: translateY(20px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
@@ -134,6 +126,7 @@
     from {
       transform: translateY(28px);
     }
+
     to {
       transform: translateY(0);
     }
@@ -146,10 +139,12 @@
   }
 
   @keyframes float {
+
     0%,
     100% {
       transform: translateY(0);
     }
+
     50% {
       transform: translateY(-12px);
     }
@@ -159,6 +154,7 @@
     from {
       transform: scaleX(0);
     }
+
     to {
       transform: scaleX(1);
     }
@@ -168,16 +164,22 @@
     from {
       transform: translateY(-30px);
     }
+
     to {
       transform: translateY(30px);
     }
   }
 }
 
+:root {
+  --header-h: 72px;
+  --header-h-lg: 120px;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 120px;
+    scroll-padding-top: var(--header-h-lg);
   }
 
   body {
@@ -209,7 +211,7 @@
   }
 }
 
-@media (width >= 40rem) and (width < 48rem) {
+@media (width >=40rem) and (width < 48rem) {
   :root {
     --text-display: 56px;
     --text-title: 36px;
@@ -235,10 +237,8 @@
   opacity: 0;
   transform: translateY(20px);
   transition:
-    opacity var(--reveal-duration, 0.45s) cubic-bezier(0.22, 1, 0.36, 1)
-      var(--reveal-delay, 0s),
-    transform var(--reveal-duration, 0.45s) cubic-bezier(0.22, 1, 0.36, 1)
-      var(--reveal-delay, 0s);
+    opacity var(--reveal-duration, 0.45s) cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s),
+    transform var(--reveal-duration, 0.45s) cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s);
 }
 
 [data-reveal="visible"] {
@@ -257,18 +257,28 @@
   animation: var(--animate-marquee);
 }
 
+/*
+ * Ornament entrance then perpetual float (Hero-style).
+ * Two animations share `animation-delay` via a comma list:
+ *   value 1 = entrance delay, value 2 = float phase offset.
+ * The float starts after the entrance so transform never conflicts.
+ */
+.animate-fade-float {
+  animation:
+    fade-up 0.5s ease-out both,
+    float 6s ease-in-out infinite;
+}
+
 .marquee-track:hover {
   animation-play-state: paused;
 }
 
 .marquee-mask {
-  mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 8%,
-    black 92%,
-    transparent
-  );
+  mask-image: linear-gradient(to right,
+      transparent,
+      black 8%,
+      black 92%,
+      transparent);
 }
 
 /*

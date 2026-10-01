@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 
-import CourseCard from "@/components/home/CourseCard";
+import CourseCard from "@/components/course/CourseCard";
 import FilterBar from "@/components/search/FilterBar";
 import AppImage from "@/components/ui/AppImage";
 import Button from "@/components/ui/Button";
 import GridOverlay from "@/components/ui/GridOverlay";
+import Reveal from "@/components/ui/Reveal";
 import Title from "@/components/ui/Title";
-import { creators, getCreator } from "@/data/creator";
 import { allCourses } from "@/data/courses";
 import {
   type SearchParams,
@@ -16,6 +15,12 @@ import {
   sortCourses,
   uniqueCategories,
 } from "@/lib/catalog";
+import {
+  creatorSlugs,
+  metadataForCreator,
+  requireCreator,
+} from "@/lib/course-route";
+import { container } from "@/lib/utils";
 
 interface CreatorPageProps {
   params: Promise<{ slug: string }>;
@@ -23,23 +28,14 @@ interface CreatorPageProps {
 }
 
 export function generateStaticParams() {
-  return creators.map((creator) => ({ slug: creator.slug }));
+  return creatorSlugs();
 }
 
-export async function generateMetadata({
-  params,
-}: CreatorPageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const creator = getCreator(slug);
-
-  if (!creator) {
-    return { title: "Creator Not Found" };
-  }
-
-  return {
+export function generateMetadata(props: CreatorPageProps): Promise<Metadata> {
+  return metadataForCreator(props, (creator) => ({
     title: `${creator.name} — Creator Profile`,
     description: `Explore courses by ${creator.name} on ByteSpace.`,
-  };
+  }));
 }
 
 export default async function CreatorProfilePage({
@@ -47,11 +43,7 @@ export default async function CreatorProfilePage({
   searchParams,
 }: CreatorPageProps) {
   const { slug } = await params;
-  const creator = getCreator(slug);
-
-  if (!creator) {
-    notFound();
-  }
+  const creator = await requireCreator({ params });
 
   const query = parseCourseQuery(await searchParams);
   const ownCourses = allCourses.filter((course) =>
@@ -62,6 +54,14 @@ export default async function CreatorProfilePage({
     filterCourses(ownCourses, query),
     query.sort,
   );
+  const courseCount = creator.courseIds.length;
+  const stats = [
+    {
+      value: String(courseCount),
+      label: courseCount === 1 ? "Course" : "Courses",
+    },
+    { value: String(creator.followers), label: "Followers" },
+  ];
 
   return (
     <>
@@ -71,7 +71,7 @@ export default async function CreatorProfilePage({
       >
         <GridOverlay />
 
-        <div className="mx-auto flex w-full max-w-page flex-col gap-10 px-5 pt-[172px] pb-[64px] sm:px-6 md:px-0">
+        <div className={`${container} flex flex-col gap-10 pt-[calc(var(--header-h)_+_100px)] pb-[64px] md:pt-[calc(var(--header-h-lg)_+_52px)]`}>
           <div className="flex flex-col gap-10">
             <div className="flex items-center gap-6">
               <AppImage
@@ -86,7 +86,7 @@ export default async function CreatorProfilePage({
                   <Title
                     as="h1"
                     variant="heading"
-                    className="font-heading text-heading font-semibold text-steel-50"
+                    className="text-steel-50"
                   >
                     {creator.name}
                   </Title>
@@ -111,7 +111,7 @@ export default async function CreatorProfilePage({
 
           <div className="flex flex-wrap items-center justify-between gap-6">
             <div className="flex flex-wrap gap-4">
-              {creator.stats.map((stat) => (
+              {stats.map((stat) => (
                 <span
                   key={stat.label}
                   className="flex items-center gap-2 rounded-full bg-white px-6 py-3 text-label-l font-medium"
@@ -129,7 +129,7 @@ export default async function CreatorProfilePage({
         </div>
       </section>
 
-      <main className="mx-auto w-full max-w-page px-5 pt-[62px] pb-16 sm:px-6 md:px-0">
+      <main className={`${container} pt-[62px] pb-16`}>
         <FilterBar
           basePath={`/creators/${slug}`}
           categories={categories}
@@ -160,8 +160,10 @@ export default async function CreatorProfilePage({
               </Button>
             </div>
           ) : (
-            visibleCourses.map((course) => (
-              <CourseCard key={course.id} course={course} variant="grid" />
+            visibleCourses.map((course, index) => (
+              <Reveal key={course.id} delay={(index % 3) * 0.08}>
+                <CourseCard course={course} variant="grid" />
+              </Reveal>
             ))
           )}
         </div>

@@ -1,4 +1,4 @@
-export interface NavLink {
+interface NavLink {
   label: string;
   href: string;
 }
@@ -14,7 +14,7 @@ export const authLinks = {
   join: { label: "Join Us", href: "/register" },
 } as const;
 
-export interface FooterColumn {
+interface FooterColumn {
   title?: string;
   links: NavLink[];
 }
@@ -24,35 +24,35 @@ export const footerColumns: FooterColumn[] = [
     title: "Browse",
     links: [
       { label: "Featured Courses", href: "/courses" },
-      { label: "Featured Categories", href: "/categories" },
-      { label: "Business", href: "/categories/business" },
-      { label: "IT", href: "/categories/it" },
-      { label: "Design", href: "/categories/design" },
+      { label: "Featured Categories", href: "/courses" },
+      { label: "Business", href: "/courses" },
+      { label: "IT", href: "/courses" },
+      { label: "Design", href: "/courses" },
     ],
   },
   {
     links: [
-      { label: "Development", href: "/categories/development" },
-      { label: "Marketing", href: "/categories/marketing" },
-      { label: "Photography", href: "/categories/photography" },
-      { label: "Finance", href: "/categories/finance" },
-      { label: "Sport", href: "/categories/sport" },
+      { label: "Development", href: "/courses" },
+      { label: "Marketing", href: "/courses" },
+      { label: "Photography", href: "/courses" },
+      { label: "Finance", href: "/courses" },
+      { label: "Sport", href: "/courses" },
     ],
   },
   {
     title: "Platform",
     links: [
       { label: "Become a Creator", href: "/register" },
-      { label: "Affiliate Program", href: "/affiliate" },
-      { label: "Contact", href: "/contact" },
-      { label: "Help", href: "/help" },
-      { label: "About", href: "/about" },
+      { label: "Affiliate Program", href: "/register" },
+      { label: "Contact", href: "/" },
+      { label: "Help", href: "/" },
+      { label: "About", href: "/" },
     ],
   },
 ];
 
 export const legalLinks: NavLink[] = [
-  { label: "Privacy Policy", href: "/privacy" },
-  { label: "Terms of Service", href: "/terms" },
-  { label: "Cookies Settings", href: "/cookies" },
+  { label: "Privacy Policy", href: "/" },
+  { label: "Terms of Service", href: "/" },
+  { label: "Cookies Settings", href: "/" },
 ];

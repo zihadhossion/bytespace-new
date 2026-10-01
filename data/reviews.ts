@@ -1,5 +1,6 @@
 import { images } from "@/lib/images";
-export interface ReviewCard {
+
+interface ReviewCard {
   name: string;
   role: string;
   time: string;
@@ -7,19 +8,27 @@ export interface ReviewCard {
   avatar: string;
 }
 
+const bars = [
+  { stars: 5, count: "720", width: 260 },
+  { stars: 4, count: "120", width: 103 },
+  { stars: 3, count: "21", width: 27 },
+  { stars: 2, count: "12", width: 10 },
+  { stars: 1, count: "16", width: 15 },
+];
+
+const ratingTotal = bars.reduce(
+  (sum, bar) => sum + bar.stars * Number(bar.count),
+  0,
+);
+const ratingCount = bars.reduce((sum, bar) => sum + Number(bar.count), 0);
+
 export const reviewsContent = {
   heading: "What Learners Are Saying",
   body: `Discover what our learners have to say about their experience with 'Build Digital Assets: A Comprehensive Guide.' Read reviews and ratings from individuals who have embarked on the transformative journey of mastering digital asset creation.`,
   summary: {
     label: "Ratings",
-    average: "4.7",
-    bars: [
-      { stars: 5, count: "720", width: 260 },
-      { stars: 4, count: "120", width: 103 },
-      { stars: 3, count: "21", width: 27 },
-      { stars: 2, count: "12", width: 10 },
-      { stars: 1, count: "16", width: 15 },
-    ],
+    average: (ratingTotal / ratingCount).toFixed(1),
+    bars,
     barWidth: 282,
   },
   listHeading: "Individual Reviews:",
@@ -30,14 +39,14 @@ export const reviewsContent = {
       role: "UI/UX Designer",
       time: "a year ago",
       text: `"The course provided me with a comprehensive understanding of digital asset creation. The lessons were in-depth, practical, and immediately applicable to my work. Highly recommended!"`,
-      avatar: images.avatars.reviewer1,
+      avatar: images.avatars.user,
     },
     {
       name: "Albert Flores",
       role: "UI/UX Designer",
       time: "a year ago",
       text: `This course transformed my approach to digital design. The combination of theory, hands-on exercises, and real-world applications made it a truly enriching experience. Excited to implement what I've learned!`,
-      avatar: images.avatars.reviewer2,
+      avatar: images.avatars.user,
     },
     {
       name: "Cody Fisher",

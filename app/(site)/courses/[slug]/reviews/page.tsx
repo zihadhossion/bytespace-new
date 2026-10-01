@@ -1,14 +1,18 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 
 import CourseLayout from "@/components/course/CourseLayout";
 import CourseSection from "@/components/course/CourseSection";
 import AppImage from "@/components/ui/AppImage";
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
+import Reveal from "@/components/ui/Reveal";
 import Title from "@/components/ui/Title";
-import { allCourses, getCourseById } from "@/data/courses";
 import { reviewsContent } from "@/data/reviews";
+import {
+  courseSlugs,
+  metadataForCourse,
+  requireCourse,
+} from "@/lib/course-route";
 import { images } from "@/lib/images";
 
 interface CourseReviewsPageProps {
@@ -16,23 +20,16 @@ interface CourseReviewsPageProps {
 }
 
 export function generateStaticParams() {
-  return allCourses.map((course) => ({ slug: course.id }));
+  return courseSlugs();
 }
 
-export async function generateMetadata({
-  params,
-}: CourseReviewsPageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const course = getCourseById(slug);
-
-  if (!course) {
-    return { title: "Course Not Found" };
-  }
-
-  return {
+export function generateMetadata(
+  props: CourseReviewsPageProps,
+): Promise<Metadata> {
+  return metadataForCourse(props, (course) => ({
     title: `${course.title} — Reviews`,
     description: `Read learner reviews and ratings for ${course.title} on ByteSpace.`,
-  };
+  }));
 }
 
 function StarIcons() {
@@ -58,15 +55,8 @@ function StarRow() {
   );
 }
 
-export default async function CourseReviewsPage({
-  params,
-}: CourseReviewsPageProps) {
-  const { slug } = await params;
-  const course = getCourseById(slug);
-
-  if (!course) {
-    notFound();
-  }
+export default async function CourseReviewsPage(props: CourseReviewsPageProps) {
+  const course = await requireCourse(props);
 
   const { summary } = reviewsContent;
 
@@ -144,9 +134,11 @@ export default async function CourseReviewsPage({
         </div>
 
         <div className="flex flex-col gap-6">
-          {reviewsContent.cards.map((review) => (
-            <article
+          {reviewsContent.cards.map((review, index) => (
+            <Reveal
               key={review.name}
+              as="article"
+              delay={(index % 3) * 0.08}
               className="flex flex-col gap-4 rounded-card border border-steel-200 bg-white p-5 sm:gap-6 sm:p-8 lg:p-10"
             >
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
@@ -181,7 +173,7 @@ export default async function CourseReviewsPage({
               >
                 {review.text}
               </Title>
-            </article>
+            </Reveal>
           ))}
         </div>
       </CourseSection>

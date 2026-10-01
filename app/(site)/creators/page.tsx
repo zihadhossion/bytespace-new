@@ -1,25 +1,24 @@
 import type { Metadata } from "next";
 
 import CreatorCard from "@/components/creator/CreatorCard";
-import CategoryTabs from "@/components/home/CategoryTabs";
 import CatalogHero from "@/components/search/CatalogHero";
+import CategoryTabs from "@/components/search/CategoryTabs";
+import CatalogList from "@/components/search/CatalogList";
 import FilterBar from "@/components/search/FilterBar";
-import Pagination from "@/components/search/Pagination";
-import Button from "@/components/ui/Button";
-import Title from "@/components/ui/Title";
 import { creators } from "@/data/creator";
 import {
   CREATORS_PER_PAGE,
-  type CreatorQuery,
   type SearchParams,
+  createHref,
   creatorDefaults,
   filterCreators,
-  hrefWith,
   paginate,
   parseCreatorQuery,
+  pickFormParams,
   sortCreators,
   uniqueCategories,
 } from "@/lib/catalog";
+import { container } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Meet Our Creators",
@@ -33,9 +32,7 @@ interface CreatorsPageProps {
 
 const formKeys = ["followers", "sort"] as const;
 
-function buildCreatorHref(query: CreatorQuery, changes: Partial<CreatorQuery>) {
-  return hrefWith("/creators", query, creatorDefaults, changes);
-}
+const buildCreatorHref = createHref("/creators", creatorDefaults);
 
 export default async function CreatorsPage({ searchParams }: CreatorsPageProps) {
   const query = parseCreatorQuery(await searchParams);
@@ -49,9 +46,7 @@ export default async function CreatorsPage({ searchParams }: CreatorsPageProps) 
   );
 
   const categories = uniqueCategories(creators);
-  const formParams = Object.fromEntries(
-    formKeys.filter((key) => query[key]).map((key) => [key, query[key]]),
-  );
+  const formParams = pickFormParams(query, formKeys);
 
   return (
     <>
@@ -64,7 +59,7 @@ export default async function CreatorsPage({ searchParams }: CreatorsPageProps) 
         formParams={formParams}
       />
 
-      <main className="mx-auto w-full max-w-page px-5 pt-[72px] pb-16 sm:px-6 md:px-0">
+      <main className={`${container} pt-[72px] pb-16`}>
         <FilterBar
           variant="creator"
           basePath="/creators"
@@ -86,39 +81,15 @@ export default async function CreatorsPage({ searchParams }: CreatorsPageProps) 
           className="mt-8"
         />
 
-        {items.length === 0 ? (
-          <div className="mt-12 flex flex-col items-center gap-4 py-16 text-center md:mt-[77px]">
-            <Title
-              as="h2"
-              variant="heading"
-              className="font-heading text-heading font-semibold text-steel-950"
-            >
-              No creators found
-            </Title>
-            <Title as="p" variant="raw" className="text-lg text-steel-400">
-              Try a different search or clear your filters.
-            </Title>
-            <Button
-              href="/creators"
-              size="none"
-              className="mt-2 px-6 py-3 text-label-m"
-            >
-              Clear all filters
-            </Button>
-          </div>
-        ) : (
-          <div className="mt-12 grid gap-10 sm:grid-cols-2 md:mt-[77px] lg:grid-cols-3">
-            {items.map((creator) => (
-              <CreatorCard key={creator.slug} creator={creator} />
-            ))}
-          </div>
-        )}
-
-        <Pagination
+        <CatalogList
+          items={items}
+          itemKey={(creator) => creator.slug}
+          renderItem={(creator) => <CreatorCard creator={creator} />}
+          emptyTitle="No creators found"
+          clearHref="/creators"
           page={page}
           totalPages={totalPages}
           hrefFor={(nextPage) => buildCreatorHref(query, { page: nextPage })}
-          className="mt-16 flex justify-center"
         />
       </main>
     </>

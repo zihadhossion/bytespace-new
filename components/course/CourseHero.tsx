@@ -6,6 +6,7 @@ import Icon from "@/components/ui/Icon";
 import Title from "@/components/ui/Title";
 import type { Course } from "@/data/courses";
 import { images } from "@/lib/images";
+import { container } from "@/lib/utils";
 
 function PlayIcon() {
   return (
@@ -40,13 +41,13 @@ export default function CourseHero({ course }: CourseHeroProps) {
     >
       <GridOverlay />
 
-      <div className="mx-auto w-full max-w-page px-5 pt-[172px] pb-[30px] sm:px-6 md:px-0">
+      <div className={`${container} pt-[calc(var(--header-h)_+_100px)] pb-[30px] md:pt-[calc(var(--header-h-lg)_+_52px)]`}>
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
           <div className="flex flex-col">
             <Title
               as="h1"
               variant="heading"
-              className="max-w-[769px] font-heading text-heading font-semibold text-steel-50"
+              className="max-w-[769px] text-steel-50"
             >
               {course.title}
             </Title>
@@ -54,7 +55,7 @@ export default function CourseHero({ course }: CourseHeroProps) {
               <Title
                 as="h2"
                 variant="subheading"
-                className="mt-2 max-w-[571px] font-heading text-subheading font-semibold text-steel-50"
+                className="mt-2 max-w-[571px] text-steel-50"
               >
                 {course.subtitle}
               </Title>

@@ -5,6 +5,7 @@ import CourseTabs, { type CourseTabId } from "@/components/course/CourseTabs";
 import EnrollCard from "@/components/course/EnrollCard";
 import StickyEnroll from "@/components/course/StickyEnroll";
 import type { Course } from "@/data/courses";
+import { container } from "@/lib/utils";
 
 interface CourseLayoutProps {
   course: Course;
@@ -23,7 +24,7 @@ export default function CourseLayout({
     <>
       <CourseHero course={course} />
 
-      <main className="mx-auto w-full max-w-page px-5 pb-24 sm:px-6 md:px-0">
+      <main className={`${container} pb-24`}>
         <div className="grid gap-x-[63px] xl:grid-cols-[minmax(0,725px)_412px]">
           <div className="pt-[63px]">
             <CourseTabs

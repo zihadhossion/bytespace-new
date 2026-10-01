@@ -1,8 +1,4 @@
 import { images } from "@/lib/images";
-export interface CreatorStat {
-  value: string;
-  label: string;
-}
 
 export interface Creator {
   slug: string;
@@ -14,7 +10,6 @@ export interface Creator {
   bio: string;
   followers: number;
   courseIds: string[];
-  stats: CreatorStat[];
   followLabel: string;
 }
 
@@ -25,7 +20,7 @@ export const creators: Creator[] = [
     badge: "Creator",
     role: "Passionate UI/UX, Web designer",
     category: "Design",
-    avatar: images.avatars.creator,
+    avatar: images.avatars.user,
     bio: `Welcome to the creative world of [Creator's Name]. Here, you'll discover the passion, expertise, and inspiration that drive my creative journey. Let's explore and learn together!
 ive into my creative portfolio, showcasing a glimpse of my artistic endeavors. From digital designs to multimedia projects, each piece tells a unique story. Explore the world of creativity with me.`,
     followers: 12,
@@ -36,10 +31,6 @@ ive into my creative portfolio, showcasing a glimpse of my artistic endeavors. F
       "balancing-productivity-and-self-care",
       "mastering-money-management",
       "from-idea-to-startup-success",
-    ],
-    stats: [
-      { value: "3", label: "Products" },
-      { value: "12", label: "Followers" },
     ],
     followLabel: "Follow",
   },
@@ -54,10 +45,6 @@ ive into my creative portfolio, showcasing a glimpse of my artistic endeavors. F
 On ByteSpace I share the exact workflows I use every day, from first sketch to production-ready components.`,
     followers: 148,
     courseIds: ["design-systems-in-figma", "color-theory-for-designers"],
-    stats: [
-      { value: "2", label: "Courses" },
-      { value: "148", label: "Followers" },
-    ],
     followLabel: "Follow",
   },
   {
@@ -71,10 +58,6 @@ On ByteSpace I share the exact workflows I use every day, from first sketch to p
 Join me as we break down the principles behind movement, timing, and feel.`,
     followers: 96,
     courseIds: ["motion-design-fundamentals"],
-    stats: [
-      { value: "1", label: "Course" },
-      { value: "96", label: "Followers" },
-    ],
     followLabel: "Follow",
   },
   {
@@ -88,10 +71,6 @@ Join me as we break down the principles behind movement, timing, and feel.`,
 New courses are on the way; follow along to get notified first.`,
     followers: 64,
     courseIds: [],
-    stats: [
-      { value: "0", label: "Courses" },
-      { value: "64", label: "Followers" },
-    ],
     followLabel: "Follow",
   },
   {
@@ -105,10 +84,6 @@ New courses are on the way; follow along to get notified first.`,
 Expect clear explanations, real code, and no fluff.`,
     followers: 210,
     courseIds: ["react-for-designers"],
-    stats: [
-      { value: "1", label: "Course" },
-      { value: "210", label: "Followers" },
-    ],
     followLabel: "Follow",
   },
   {
@@ -122,10 +97,6 @@ Expect clear explanations, real code, and no fluff.`,
 I'm filming my first ByteSpace course right now.`,
     followers: 87,
     courseIds: [],
-    stats: [
-      { value: "0", label: "Courses" },
-      { value: "87", label: "Followers" },
-    ],
     followLabel: "Follow",
   },
 ];
@@ -133,12 +104,3 @@ I'm filming my first ByteSpace course right now.`,
 export function getCreator(slug: string): Creator | undefined {
   return creators.find((creator) => creator.slug === slug);
 }
-
-export const creatorToolbar = {
-  filters: [
-    { icon: images.icons.filter, label: "Filter" },
-    { icon: images.icons.levelBlue, label: "Level" },
-    { icon: images.icons.category, label: "Category" },
-  ],
-  sort: { icon: images.icons.sort, label: "Most relevant" },
-};
