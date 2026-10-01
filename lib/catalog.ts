@@ -47,13 +47,6 @@ export interface Option {
   label: string;
 }
 
-const levels = ["Beginner", "Intermediate"];
-const ratings = ["4.5", "4.7", "4.8"];
-const prices = ["under-25", "25-35", "over-35"];
-const courseSorts = ["", "rating", "price-asc", "price-desc", "students"];
-const creatorSorts = ["", "followers", "courses"];
-const followerSteps = ["50", "100", "200"];
-
 export const levelOptions: Option[] = [
   { value: "", label: "Any level" },
   { value: "Beginner", label: "Beginner" },
@@ -94,6 +87,17 @@ export const creatorSortOptions: Option[] = [
   { value: "followers", label: "Most followers" },
   { value: "courses", label: "Most courses" },
 ];
+
+function optionValues(options: Option[]): string[] {
+  return options.map((option) => option.value);
+}
+
+const levels = optionValues(levelOptions);
+const ratings = optionValues(ratingOptions);
+const prices = optionValues(priceOptions);
+const courseSorts = optionValues(courseSortOptions);
+const creatorSorts = optionValues(creatorSortOptions);
+const followerSteps = optionValues(followerOptions);
 
 export function optionLabel(options: Option[], value: string): string {
   return options.find((option) => option.value === value)?.label ?? "";
@@ -143,7 +147,7 @@ export function parseCreatorQuery(sp: SearchParams): CreatorQuery {
 
 type Values = Record<string, string | number>;
 
-export function buildHref(path: string, values: Values, defaults: Values): string {
+function buildHref(path: string, values: Values, defaults: Values): string {
   const params = new URLSearchParams();
   for (const [key, raw] of Object.entries(values)) {
     const value = String(raw);
@@ -167,6 +171,22 @@ export function hrefWith<T extends { page: number }>(
     next.page = defaults.page;
   }
   return buildHref(path, next, defaults);
+}
+
+export function createHref<T extends { page: number }>(
+  path: string,
+  defaults: T,
+): (query: T, changes: Partial<T>) => string {
+  return (query, changes) => hrefWith(path, query, defaults, changes);
+}
+
+export function pickFormParams<K extends string>(
+  query: Record<K, string | number>,
+  keys: readonly K[],
+): Record<string, string> {
+  return Object.fromEntries(
+    keys.filter((key) => query[key]).map((key) => [key, String(query[key])]),
+  );
 }
 
 function includes(haystack: string, needle: string): boolean {

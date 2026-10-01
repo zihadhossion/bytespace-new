@@ -8,6 +8,8 @@ import AppImage from "@/components/ui/AppImage";
 import MobileNav from "@/components/layout/MobileNav";
 import { authLinks, navLinks } from "@/data/nav";
 import { images } from "@/lib/images";
+import { isActiveLink } from "@/lib/nav";
+import { container } from "@/lib/utils";
 
 function CartIcon() {
   return (
@@ -67,7 +69,7 @@ export default function Header({
           }`}
         />
       ) : null}
-      <div className="relative mx-auto flex h-[72px] w-full max-w-page items-center justify-between px-5 sm:px-6 md:h-[120px] md:px-0">
+      <div className={`relative ${container} flex h-[var(--header-h)] items-center justify-between md:h-[var(--header-h-lg)]`}>
         {isLogoOnly ? (
           <Link
             href="/"
@@ -107,10 +109,7 @@ export default function Header({
               aria-label="Primary"
             >
               {navLinks.map((link) => {
-                const isActive =
-                  link.href === "/"
-                    ? pathname === "/"
-                    : pathname.startsWith(link.href);
+                const isActive = isActiveLink(pathname, link.href);
 
                 return (
                   <Link
@@ -119,7 +118,7 @@ export default function Header({
                     aria-current={isActive ? "page" : undefined}
                     className={`text-base leading-6 transition-opacity hover:opacity-70 ${
                       isActive
-                        ? "font-medium underline decoration-2 underline-offset-[6px]"
+                        ? "font-medium"
                         : ""
                     }`}
                   >

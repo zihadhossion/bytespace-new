@@ -1,15 +1,11 @@
 import AppImage from "@/components/ui/AppImage";
-
-interface Avatar {
-  src: string;
-  alt: string;
-}
+import type { Avatar } from "@/data/avatars";
 
 interface AvatarStackProps {
   avatars: Avatar[];
   total?: string;
   size?: "sm" | "md";
-  totalVariant?: "lime" | "dark";
+  totalVariant?: "lime" | "dark" | "steel";
 }
 
 const sizes = {
@@ -22,6 +18,12 @@ const overlaps = {
   md: "-space-x-4",
 };
 
+const badgeColors = {
+  lime: "bg-volt-400 text-steel-950",
+  dark: "bg-black text-white",
+  steel: "bg-steel-950 text-steel-50",
+};
+
 export default function AvatarStack({
   avatars,
   total,
@@ -29,8 +31,7 @@ export default function AvatarStack({
   totalVariant = "lime",
 }: AvatarStackProps) {
   const border = size === "md" ? "border-2 border-white" : "";
-  const badgeColor =
-    totalVariant === "lime" ? "bg-volt-400 text-steel-950" : "bg-black text-white";
+  const badgeColor = badgeColors[totalVariant];
 
   return (
     <div className={`flex ${overlaps[size]}`}>

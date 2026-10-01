@@ -1,15 +1,17 @@
 import Link from "next/link";
 
 import AppImage from "@/components/ui/AppImage";
+import Reveal from "@/components/ui/Reveal";
 import Title from "@/components/ui/Title";
 import NewsletterForm from "@/components/newsletter/NewsletterForm";
 import { footerColumns, legalLinks } from "@/data/nav";
 import { images } from "@/lib/images";
+import { container } from "@/lib/utils";
 
 export default function Footer() {
   return (
     <footer className="border-t border-steel-200 bg-white">
-      <div className="mx-auto w-full max-w-page px-5 pt-6 pb-6 sm:px-6 md:px-0 md:pt-[71px] md:pb-[48px]">
+      <Reveal className={`${container} pt-6 pb-6 md:pt-[71px] md:pb-[48px]`}>
         <div className="flex flex-col gap-6 sm:gap-16 xl:flex-row xl:gap-[92px]">
           <div className="flex flex-col gap-8 md:gap-[45px]">
             <div className="flex flex-col gap-4">
@@ -86,7 +88,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-      </div>
+      </Reveal>
     </footer>
   );
 }

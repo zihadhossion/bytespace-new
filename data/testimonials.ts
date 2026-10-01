@@ -1,5 +1,5 @@
 import { images } from "@/lib/images";
-export interface Testimonial {
+interface Testimonial {
   name: string;
   role: string;
   quote: string;

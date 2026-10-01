@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 
 import CourseLayout from "@/components/course/CourseLayout";
 import CourseSection from "@/components/course/CourseSection";
 import Icon from "@/components/ui/Icon";
+import Reveal from "@/components/ui/Reveal";
 import Title from "@/components/ui/Title";
-import { allCourses, getCourseById } from "@/data/courses";
 import { lessonContent, lessonModules, lessonsIntro } from "@/data/lessons";
+import {
+  courseSlugs,
+  metadataForCourse,
+  requireCourse,
+} from "@/lib/course-route";
 import { images } from "@/lib/images";
 
 interface CourseLessonsPageProps {
@@ -14,34 +18,22 @@ interface CourseLessonsPageProps {
 }
 
 export function generateStaticParams() {
-  return allCourses.map((course) => ({ slug: course.id }));
+  return courseSlugs();
 }
 
-export async function generateMetadata({
-  params,
-}: CourseLessonsPageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const course = getCourseById(slug);
-
-  if (!course) {
-    return { title: "Course Not Found" };
-  }
-
-  return {
+export function generateMetadata(
+  props: CourseLessonsPageProps,
+): Promise<Metadata> {
+  return metadataForCourse(props, (course) => ({
     title: `${course.title} — Lessons`,
     description: `Explore the modules and lessons of ${course.title} on ByteSpace.`,
-  };
+  }));
 }
 
-export default async function CourseLessonsPage({
-  params,
-}: CourseLessonsPageProps) {
-  const { slug } = await params;
-  const course = getCourseById(slug);
-
-  if (!course) {
-    notFound();
-  }
+export default async function CourseLessonsPage(
+  props: CourseLessonsPageProps,
+) {
+  const course = await requireCourse(props);
 
   return (
     <CourseLayout course={course} active="lessons" lessonsLabel="Lesson">
@@ -52,15 +44,16 @@ export default async function CourseLessonsPage({
         <Title
           as="h2"
           variant="subheading"
-          className="text-subheading font-semibold text-steel-950"
         >
           {lessonsIntro.listHeading}
         </Title>
 
         <ul className="flex flex-col gap-5 sm:gap-6">
-          {lessonModules.map((module) => (
-            <li
+          {lessonModules.map((module, index) => (
+            <Reveal
               key={module.title}
+              as="li"
+              delay={(index % 3) * 0.08}
               className="flex items-start gap-3 sm:gap-[13px]"
             >
               <div className="mt-px flex h-14 w-14 shrink-0 items-center justify-center rounded-card bg-volt-400 sm:h-[72px] sm:w-[72px]">
@@ -86,7 +79,7 @@ export default async function CourseLessonsPage({
                   {module.description}
                 </Title>
               </div>
-            </li>
+            </Reveal>
           ))}
         </ul>
       </CourseSection>
@@ -120,7 +113,6 @@ export default async function CourseLessonsPage({
             <Title
               as="h2"
               variant="heading"
-              className="font-heading text-heading font-semibold text-steel-950"
             >
               {lessonContent.progress.value}
             </Title>

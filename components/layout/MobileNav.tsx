@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 
 import Button from "@/components/ui/Button";
 import { authLinks, navLinks } from "@/data/nav";
+import { isActiveLink } from "@/lib/nav";
 
 function MenuIcon() {
   return (
@@ -101,6 +102,7 @@ export default function MobileNav({ tone = "light" }: MobileNavProps) {
   const border = isDark ? "border-white/15" : "border-steel-200";
   const hover = isDark ? "hover:bg-white/10" : "hover:bg-steel-100";
   const outlineHoverBorder = isDark ? "hover:border-white/15" : "hover:border-steel-200";
+  const outlineText = isDark ? "text-steel-50" : "";
 
   return (
     <div className="md:hidden">
@@ -158,10 +160,7 @@ export default function MobileNav({ tone = "light" }: MobileNavProps) {
         >
           <ul className="flex flex-col">
             {navLinks.map((link) => {
-              const isActive =
-                link.href === "/"
-                  ? pathname === "/"
-                  : pathname.startsWith(link.href);
+              const isActive = isActiveLink(pathname, link.href);
 
               return (
                 <li key={link.href}>
@@ -195,7 +194,7 @@ export default function MobileNav({ tone = "light" }: MobileNavProps) {
             href={authLinks.signIn.href}
             variant="outline"
             onClick={close}
-            className={`h-12 text-base ${border} ${hover} ${outlineHoverBorder}`}
+            className={`h-12 text-base ${border} ${hover} ${outlineHoverBorder} ${outlineText}`}
           >
             {authLinks.signIn.label}
           </Button>

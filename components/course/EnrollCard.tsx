@@ -32,7 +32,6 @@ export default function EnrollCard({ course }: EnrollCardProps) {
         <Title
           as="p"
           variant="subheading"
-          className="text-subheading font-semibold text-steel-950"
         >
           {lessonsSummary}
         </Title>
@@ -76,7 +75,6 @@ export default function EnrollCard({ course }: EnrollCardProps) {
       <Title
         as="p"
         variant="subheading"
-        className="text-subheading font-semibold text-steel-950"
       >
         This course include
       </Title>
@@ -110,7 +108,6 @@ export default function EnrollCard({ course }: EnrollCardProps) {
             </span>
           </div>
         </div>
-        <Title as="p" variant="base" className="text-base text-steel-700">{enrollCard.blurb}</Title>
         {creator ? (
           <Button
             href={`/creators/${creator.slug}`}

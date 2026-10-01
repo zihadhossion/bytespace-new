@@ -20,6 +20,7 @@ import {
   ratingOptions,
   type CourseQuery,
   type CreatorQuery,
+  type Option,
 } from "@/lib/catalog";
 
 interface MenuOption {
@@ -152,6 +153,53 @@ const pillIcon = {
   creator: images.icons.filterCreator,
 };
 
+function buildCategoryPill(
+  categories: string[],
+  category: string,
+  link: (value: string) => string,
+): DropdownProps {
+  return {
+    label: "Category",
+    detail: category || undefined,
+    icon: images.icons.category,
+    active: category !== "",
+    ariaLabel: "Filter by category",
+    groups: [
+      {
+        options: categoryOptions(categories).map((option) => ({
+          label: option.label,
+          href: link(option.value),
+          active: category === option.value,
+        })),
+      },
+    ],
+  };
+}
+
+function buildSortPill(
+  sort: string,
+  sortOptions: Option[],
+  ariaLabel: string,
+  link: (value: string) => string,
+): DropdownProps {
+  return {
+    label: optionLabel(sortOptions, sort) || "Most relevant",
+    icon: images.icons.sort,
+    ariaLabel,
+    align: "right",
+    active: sort !== "",
+    groups: [
+      {
+        options: sortOptions.map((option) => ({
+          label: option.label,
+          href: link(option.value),
+          active: sort === option.value,
+        })),
+      },
+    ],
+  };
+}
+
 type FilterBarProps =
   | {
       variant?: "course";
@@ -170,14 +218,6 @@ type FilterBarProps =
 
 export default function FilterBar(props: FilterBarProps) {
   const { basePath, categories, className = "" } = props;
-
-  const categoryGroup = (category: string, link: (value: string) => string): MenuGroup => ({
-    options: categoryOptions(categories).map((option) => ({
-      label: option.label,
-      href: link(option.value),
-      active: category === option.value,
-    })),
-  });
 
   let filterPill: { label: string; detail?: string; groups: MenuGroup[]; active: boolean };
   let levelPill: DropdownProps | null = null;
@@ -205,31 +245,18 @@ export default function FilterBar(props: FilterBarProps) {
       ],
     };
 
-    categoryPill = {
-      label: "Category",
-      detail: query.category || undefined,
-      icon: images.icons.category,
-      active: query.category !== "",
-      ariaLabel: "Filter by category",
-      groups: [categoryGroup(query.category, (value) => link({ category: value }))],
-    };
+    categoryPill = buildCategoryPill(
+      categories,
+      query.category,
+      (value) => link({ category: value }),
+    );
 
-    sortPill = {
-      label: optionLabel(creatorSortOptions, query.sort) || "Most relevant",
-      icon: images.icons.sort,
-      ariaLabel: "Sort creators",
-      align: "right",
-      active: query.sort !== "",
-      groups: [
-        {
-          options: creatorSortOptions.map((option) => ({
-            label: option.label,
-            href: link({ sort: option.value }),
-            active: query.sort === option.value,
-          })),
-        },
-      ],
-    };
+    sortPill = buildSortPill(
+      query.sort,
+      creatorSortOptions,
+      "Sort creators",
+      (value) => link({ sort: value }),
+    );
   } else {
     const { query } = props;
     const link = (changes: Partial<CourseQuery>) =>
@@ -282,31 +309,18 @@ export default function FilterBar(props: FilterBarProps) {
       ],
     };
 
-    categoryPill = {
-      label: "Category",
-      detail: query.category || undefined,
-      icon: images.icons.category,
-      active: query.category !== "",
-      ariaLabel: "Filter by category",
-      groups: [categoryGroup(query.category, (value) => link({ category: value }))],
-    };
+    categoryPill = buildCategoryPill(
+      categories,
+      query.category,
+      (value) => link({ category: value }),
+    );
 
-    sortPill = {
-      label: optionLabel(courseSortOptions, query.sort) || "Most relevant",
-      icon: images.icons.sort,
-      ariaLabel: "Sort courses",
-      align: "right",
-      active: query.sort !== "",
-      groups: [
-        {
-          options: courseSortOptions.map((option) => ({
-            label: option.label,
-            href: link({ sort: option.value }),
-            active: query.sort === option.value,
-          })),
-        },
-      ],
-    };
+    sortPill = buildSortPill(
+      query.sort,
+      courseSortOptions,
+      "Sort courses",
+      (value) => link({ sort: value }),
+    );
   }
 
   const filterIcon =

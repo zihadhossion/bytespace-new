@@ -1,4 +1,4 @@
-export interface LessonModule {
+interface LessonModule {
   title: string;
   description: string;
 }

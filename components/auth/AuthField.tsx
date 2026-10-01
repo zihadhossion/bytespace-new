@@ -1,4 +1,5 @@
 import Title from "@/components/ui/Title";
+import { inputBase } from "@/lib/utils";
 
 interface AuthFieldProps {
   id: string;
@@ -43,7 +44,7 @@ export default function AuthField({
         autoComplete={autoComplete}
         aria-invalid={error ? true : undefined}
         aria-describedby={error ? errorId : undefined}
-        className={`h-[52px] w-full rounded-[12px] border bg-white px-6 text-lg text-steel-950 placeholder:text-steel-400 focus:outline-none ${
+        className={`h-[52px] w-full rounded-[12px] border bg-white px-6 ${inputBase} ${
           error
             ? "border-error-600 focus:border-error-600"
             : "border-steel-100 focus:border-brand-800"

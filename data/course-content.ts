@@ -46,5 +46,5 @@ export const enrollCard = {
       label: "Private Consultation",
     },
   ],
-  creatorAvatar: images.avatars.enroll,
+  creatorAvatar: images.avatars.user,
 };

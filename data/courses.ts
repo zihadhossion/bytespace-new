@@ -15,6 +15,16 @@ export interface Course {
   students: number;
 }
 
+const defaultCourseStats = {
+  level: "Beginner",
+  price: "$25",
+  rating: "4.5",
+  lessons: "17 Lessons",
+  duration: "2 hours 16 mins",
+  comments: "59 Comments",
+  students: 26,
+} satisfies Partial<Course>;
+
 export const courses: Course[] = [
   {
     id: "learn-figma-from-basic",
@@ -22,14 +32,8 @@ export const courses: Course[] = [
     subtitle: "Go from zero to confident in Figma, one practical screen at a time",
     author: "purepearl studio",
     category: "UI/UX Design",
-    level: "Beginner",
-    price: "$25",
-    rating: "4.5",
-    lessons: "17 Lessons",
-    duration: "2 hours 16 mins",
-    comments: "59 Comments",
+    ...defaultCourseStats,
     image: images.courses.learnFigmaFromBasic,
-    students: 26,
   },
   {
     id: "build-digital-asset",
@@ -37,14 +41,8 @@ export const courses: Course[] = [
     subtitle: "Unlock the Power of Digital Creation with Expert Guidance",
     author: "purepearl studio",
     category: "Drawing & Painting",
-    level: "Beginner",
-    price: "$25",
-    rating: "4.5",
-    lessons: "17 Lessons",
-    duration: "2 hours 16 mins",
-    comments: "59 Comments",
+    ...defaultCourseStats,
     image: images.courses.buildDigitalAsset,
-    students: 26,
   },
   {
     id: "power-of-big-data",
@@ -52,14 +50,8 @@ export const courses: Course[] = [
     subtitle: "Turn raw data into decisions with modern analytics fundamentals",
     author: "purepearl studio",
     category: "Data Science",
-    level: "Beginner",
-    price: "$25",
-    rating: "4.5",
-    lessons: "17 Lessons",
-    duration: "2 hours 16 mins",
-    comments: "59 Comments",
+    ...defaultCourseStats,
     image: images.courses.powerOfBigData,
-    students: 26,
   },
   {
     id: "balancing-productivity-and-self-care",
@@ -67,14 +59,8 @@ export const courses: Course[] = [
     subtitle: "Build habits that keep you productive without burning out",
     author: "purepearl studio",
     category: "Productivity",
-    level: "Beginner",
-    price: "$25",
-    rating: "4.5",
-    lessons: "17 Lessons",
-    duration: "2 hours 16 mins",
-    comments: "59 Comments",
+    ...defaultCourseStats,
     image: images.courses.balancingProductivity,
-    students: 26,
   },
   {
     id: "mastering-money-management",
@@ -82,14 +68,8 @@ export const courses: Course[] = [
     subtitle: "Take control of your finances and grow your income with confidence",
     author: "purepearl studio",
     category: "Freelance & Entrepreneurship",
-    level: "Beginner",
-    price: "$25",
-    rating: "4.5",
-    lessons: "17 Lessons",
-    duration: "2 hours 16 mins",
-    comments: "59 Comments",
+    ...defaultCourseStats,
     image: images.courses.masteringMoneyManagement,
-    students: 26,
   },
   {
     id: "from-idea-to-startup-success",
@@ -97,18 +77,12 @@ export const courses: Course[] = [
     subtitle: "Validate, launch, and scale a startup from a single idea",
     author: "purepearl studio",
     category: "Freelance & Entrepreneurship",
-    level: "Beginner",
-    price: "$25",
-    rating: "4.5",
-    lessons: "17 Lessons",
-    duration: "2 hours 16 mins",
-    comments: "59 Comments",
+    ...defaultCourseStats,
     image: images.courses.fromIdeaToStartupSuccess,
-    students: 26,
   },
 ];
 
-export const additionalCourses: Course[] = [
+const additionalCourses: Course[] = [
   {
     id: "design-systems-in-figma",
     title: "Design Systems in Figma",
