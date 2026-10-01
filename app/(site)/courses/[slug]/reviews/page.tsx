@@ -42,7 +42,8 @@ function StarIcons() {
         <Icon
           key={index}
           src={images.icons.starDark}
-          className="h-6 w-6"
+          alt="Star"
+          className="h-5 w-5 sm:h-6 sm:w-6"
         />
       ))}
     </>
@@ -91,8 +92,11 @@ export default async function CourseReviewsPage({
 
           <div className="flex w-full min-w-0 flex-col gap-1 sm:w-[490px]">
             {summary.bars.map((bar) => (
-              <div key={bar.stars} className="flex h-[26px] items-center gap-4">
-                <div className="h-2 w-full max-w-[282px] shrink overflow-hidden rounded-full bg-steel-100">
+              <div
+                key={bar.stars}
+                className="flex flex-col gap-1.5 sm:h-[26px] sm:flex-row sm:items-center sm:gap-4"
+              >
+                <div className="h-2 w-full shrink overflow-hidden rounded-full bg-steel-100 sm:max-w-[282px]">
                   <div
                     className="h-full rounded-full bg-volt-400"
                     style={{
@@ -100,12 +104,14 @@ export default async function CourseReviewsPage({
                     }}
                   />
                 </div>
-                <div className="flex shrink-0 gap-1">
-                  <StarIcons />
+                <div className="flex items-center gap-3 sm:contents">
+                  <div className="flex shrink-0 gap-1">
+                    <StarIcons />
+                  </div>
+                  <span className="w-10 shrink-0 text-right text-base text-steel-700">
+                    {bar.count}
+                  </span>
                 </div>
-                <span className="w-10 shrink-0 text-right text-base text-steel-700">
-                  {bar.count}
-                </span>
               </div>
             ))}
           </div>
@@ -116,7 +122,7 @@ export default async function CourseReviewsPage({
         id="individual-heading"
         heading={reviewsContent.listHeading}
       >
-        <div className="flex min-h-12 flex-wrap items-start gap-4">
+        <div className="flex min-h-12 flex-wrap items-start gap-2 sm:gap-4">
           <Button size="none" className="px-4 py-3 text-label-m">
             All rating
           </Button>
@@ -129,7 +135,8 @@ export default async function CourseReviewsPage({
             >
               <Icon
                 src={images.icons.starDark}
-                className="h-6 w-6"
+                alt="Star"
+                className="h-5 w-5 sm:h-6 sm:w-6"
               />
               {filter}
             </Button>
@@ -137,13 +144,13 @@ export default async function CourseReviewsPage({
         </div>
 
         <div className="flex flex-col gap-6">
-          {reviewsContent.cards.map((review, index) => (
+          {reviewsContent.cards.map((review) => (
             <article
               key={review.name}
-              className="flex flex-col gap-6 rounded-card border border-steel-200 bg-white p-10"
+              className="flex flex-col gap-4 rounded-card border border-steel-200 bg-white p-5 sm:gap-6 sm:p-8 lg:p-10"
             >
-              <div className="flex items-start justify-between">
-                <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                <div className="flex flex-col gap-3 sm:gap-6">
                   <div className="flex items-start gap-3">
                     <AppImage
                       src={review.avatar}
@@ -170,9 +177,7 @@ export default async function CourseReviewsPage({
               <Title
                 as="p"
                 variant="base"
-                className={`text-base text-steel-700 ${
-                  index === 0 ? "leading-6" : ""
-                }`}
+                className="text-base text-steel-700"
               >
                 {review.text}
               </Title>

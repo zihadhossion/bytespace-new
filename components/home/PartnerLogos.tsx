@@ -1,3 +1,4 @@
+import AppImage from "@/components/ui/AppImage";
 import { partnerLogo } from "@/lib/images";
 
 interface PartnerLogosProps {
@@ -13,12 +14,14 @@ export default function PartnerLogos({ className = "" }: PartnerLogosProps) {
       className={`bg-steel-50 ${className}`}
       aria-label="Partner logos"
     >
-      <div className="mx-auto flex min-h-[202px] w-full max-w-page flex-wrap items-center justify-center gap-8 px-6 py-10 sm:gap-12 lg:px-10 xl:gap-[72px]">
+      <div className="mx-auto flex min-h-[202px] w-full max-w-page flex-wrap items-center justify-center gap-8 px-5 py-10 sm:gap-12 sm:px-6 md:px-0 xl:gap-[72px]">
         {logos.map((logo) => (
-          <img
+          <AppImage
             key={logo}
             src={partnerLogo(logo)}
             alt="Logoipsum"
+            width={160}
+            height={41}
             className="h-[34px] w-auto md:h-[41px]"
           />
         ))}

@@ -26,10 +26,9 @@ export default function Hero({ className = "" }: HeroProps) {
 
         <AppImage
           src={images.hero.person}
-          alt=""
+          alt="Smiling student wearing headphones and holding a laptop"
           width={1444}
           height={1378}
-          aria-hidden
           className="absolute top-[392px] left-[431px] w-[722px] max-w-none"
         />
 
@@ -61,7 +60,7 @@ export default function Hero({ className = "" }: HeroProps) {
               </Title>
               <div className="flex items-center gap-0">
                 <span className="text-xs text-steel-950">4.5 (240)</span>
-                <Icon src={images.icons.starSm} className="h-4 w-4" />
+                <Icon src={images.icons.starSm} alt="Star" className="h-4 w-4" />
               </div>
             </div>
             <AvatarStack avatars={stackAvatars} total="2K+" size="md" />
@@ -69,12 +68,57 @@ export default function Hero({ className = "" }: HeroProps) {
         </div>
 
         <AppImage
-          src={images.hero.ornaments}
-          alt=""
-          width={3446}
-          height={1610}
+          src={images.hero.ornaments.springLime}
+          alt="Lime green spiral spring decoration"
+          width={505}
+          height={537}
           aria-hidden
-          className="absolute top-[100px] left-[-120px] w-[1723px] max-w-none"
+          className="absolute top-[165px] left-[-56px] w-[252.5px] max-w-none"
+        />
+
+        <AppImage
+          src={images.hero.ornaments.squiggleSm}
+          alt="Small squiggle decoration"
+          width={230}
+          height={244}
+          aria-hidden
+          className="absolute top-[386px] left-[218px] w-[115px] max-w-none"
+        />
+
+        <AppImage
+          src={images.hero.ornaments.donutWhite}
+          alt="White donut ring decoration"
+          width={477}
+          height={437}
+          aria-hidden
+          className="absolute top-[621px] left-[69px] w-[238.5px] max-w-none"
+        />
+
+        <AppImage
+          src={images.hero.ornaments.coneWhite}
+          alt="White cone decoration"
+          width={250}
+          height={275}
+          aria-hidden
+          className="absolute top-[366px] left-[1133px] w-[125px] max-w-none"
+        />
+
+        <AppImage
+          src={images.hero.ornaments.squiggleLg}
+          alt="Large squiggle decoration"
+          width={382}
+          height={500}
+          aria-hidden
+          className="absolute top-[590px] left-[1198px] w-[191px] max-w-none"
+        />
+
+        <AppImage
+          src={images.hero.ornaments.cylinderLime}
+          alt="Lime green cylinder decoration"
+          width={548}
+          height={599}
+          aria-hidden
+          className="absolute top-[136px] left-[1278px] w-[274px] max-w-none"
         />
 
         <div className="absolute top-[519px] left-[404px] w-[208px] rounded-2xl bg-white p-4 text-steel-950">
@@ -89,7 +133,7 @@ export default function Hero({ className = "" }: HeroProps) {
         </div>
       </div>
 
-      <div className="relative z-[2] mx-auto flex w-full max-w-page flex-col items-center px-6 pt-[49px] pb-16 text-center lg:px-10 xl:min-h-[904px] xl:pb-0">
+      <div className="relative z-[2] mx-auto flex w-full max-w-page flex-col items-center px-5 pt-[49px] pb-16 text-center sm:px-6 md:px-0 xl:min-h-[904px] xl:pb-0">
         <Title
           as="h1"
           variant="display"
@@ -116,7 +160,7 @@ export default function Hero({ className = "" }: HeroProps) {
               aria-label="Search courses"
               className="-mx-2 h-10 w-10 shrink-0"
             >
-              <Icon src={images.icons.search} className="h-6 w-6" />
+              <Icon src={images.icons.search} alt="Search" className="h-6 w-6" />
             </Button>
             <input
               type="search"
@@ -136,10 +180,9 @@ export default function Hero({ className = "" }: HeroProps) {
 
         <AppImage
           src={images.hero.person}
-          alt=""
+          alt="Smiling student wearing headphones and holding a laptop"
           width={1444}
           height={1378}
-          aria-hidden
           className="mt-12 w-full max-w-[578px] xl:hidden"
         />
       </div>

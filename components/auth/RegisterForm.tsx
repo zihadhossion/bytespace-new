@@ -51,12 +51,21 @@ export default function RegisterForm() {
   };
 
   return (
-    <form className="flex flex-col" noValidate onChange={handleChange} onSubmit={handleSubmit}>
-      <Title as="p" variant="raw" className="text-lg text-brand-800">Create an Account</Title>
+    <form
+      className="flex flex-col"
+      noValidate
+      onChange={handleChange}
+      onSubmit={handleSubmit}
+    >
+      <Title as="p" variant="raw" className="text-lg text-brand-800">
+        Create an Account
+      </Title>
 
-      <Title as="h1" variant="title" className="text-title text-steel-950">Welcome to ByteSpace</Title>
+      <Title as="h1" variant="title" className="text-title text-steel-950">
+        Welcome to ByteSpace
+      </Title>
 
-      <div className="mt-[93px] flex flex-col gap-6">
+      <div className="mt-10 flex flex-col gap-6">
         <AuthField
           id="full-name"
           name="fullName"
@@ -93,13 +102,15 @@ export default function RegisterForm() {
       </div>
 
       <div className="mt-[24px] flex justify-end">
-        <Button type="submit">Continue</Button>
+        <Button type="submit" className="w-full sm:w-auto">
+          Continue
+        </Button>
       </div>
 
       <Title
         as="p"
         variant="base"
-        className="mt-[122px] flex justify-center gap-1 text-base text-steel-700"
+        className="mt-12 flex justify-center gap-1 text-base text-steel-700 md:mt-[122px]"
       >
         Already have an account?
         <Link href="/login" className="text-brand-800 hover:underline">

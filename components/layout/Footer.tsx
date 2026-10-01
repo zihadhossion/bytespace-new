@@ -9,7 +9,7 @@ import { images } from "@/lib/images";
 export default function Footer() {
   return (
     <footer className="border-t border-steel-200 bg-white">
-      <div className="mx-auto w-full max-w-page px-4 pt-6 pb-6 md:pt-[71px] md:pb-[48px] lg:px-10">
+      <div className="mx-auto w-full max-w-page px-5 pt-6 pb-6 sm:px-6 md:px-0 md:pt-[71px] md:pb-[48px]">
         <div className="flex flex-col gap-6 sm:gap-16 xl:flex-row xl:gap-[92px]">
           <div className="flex flex-col gap-8 md:gap-[45px]">
             <div className="flex flex-col gap-4">
@@ -45,7 +45,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <nav className="flex flex-wrap items-end gap-x-4 gap-y-6 sm:gap-x-10 sm:gap-y-10">
+          <nav className="flex items-end gap-x-4 gap-y-6 sm:gap-x-10 sm:gap-y-10">
             {footerColumns.map((column) => (
               <div
                 key={column.title ?? column.links[0]?.href}

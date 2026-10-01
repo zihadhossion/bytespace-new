@@ -57,13 +57,17 @@ export default async function CourseLessonsPage({
           {lessonsIntro.listHeading}
         </Title>
 
-        <ul className="flex flex-col gap-6">
+        <ul className="flex flex-col gap-5 sm:gap-6">
           {lessonModules.map((module) => (
-            <li key={module.title} className="flex items-start gap-[13px]">
-              <div className="mt-px flex h-[72px] w-[72px] shrink-0 items-center justify-center rounded-card bg-volt-400">
+            <li
+              key={module.title}
+              className="flex items-start gap-3 sm:gap-[13px]"
+            >
+              <div className="mt-px flex h-14 w-14 shrink-0 items-center justify-center rounded-card bg-volt-400 sm:h-[72px] sm:w-[72px]">
                 <Icon
                   src={images.icons.moduleVideo}
-                  className="h-10 w-10"
+                  alt="Video"
+                  className="h-7 w-7 sm:h-10 sm:w-10"
                 />
               </div>
               <div className="flex min-w-0 flex-col gap-1">
@@ -104,7 +108,7 @@ export default async function CourseLessonsPage({
           {lessonContent.progressBody}
         </Title>
 
-        <div className="flex w-full flex-col gap-2 rounded-2xl bg-white p-4">
+        <div className="flex w-full flex-col gap-2 rounded-2xl border border-steel-200 bg-white p-5 sm:p-6">
           <Title
             as="p"
             variant="raw"

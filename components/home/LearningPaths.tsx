@@ -22,7 +22,7 @@ export default function LearningPaths({ className = "" }: LearningPathsProps) {
   return (
     <section
       id="learning-paths"
-      className={`mx-auto w-full max-w-page px-6 pt-12 pb-16 md:pt-[72px] md:pb-[120px] lg:px-10 ${className}`}
+      className={`mx-auto w-full max-w-page px-5 pt-12 pb-16 sm:px-6 md:px-0 md:pt-[72px] md:pb-[120px] ${className}`}
       aria-label="Explore diverse learning paths"
     >
       <div className="mx-auto flex max-w-[917px] flex-col items-center gap-4 text-center">
@@ -46,6 +46,7 @@ export default function LearningPaths({ className = "" }: LearningPathsProps) {
           >
             <Icon
               src={categoryIcon(icons[category.label] ?? "design")}
+              alt="Category"
               className="h-12 w-12 md:h-[60px] md:w-[60px]"
             />
             <span className="text-center text-[20px] leading-[1.2] font-medium text-steel-950">

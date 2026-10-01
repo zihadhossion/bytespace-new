@@ -77,7 +77,7 @@ export default function CourseCard({
 
             <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
               <span className="flex items-center gap-1 rounded-full bg-steel-50 px-3 py-1.5 text-xs leading-[1.2] font-medium text-steel-700">
-                <Icon src={images.icons.level} className="h-5 w-5" />
+                <Icon src={images.icons.level} alt="Level" className="h-5 w-5" />
                 {course.level}
               </span>
               <AvatarStack
@@ -108,6 +108,7 @@ export default function CourseCard({
                   ? images.icons.starLime
                   : images.icons.star
               }
+              alt="Star"
               className="h-6 w-6"
             />
           </div>

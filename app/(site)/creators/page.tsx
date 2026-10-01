@@ -64,7 +64,7 @@ export default async function CreatorsPage({ searchParams }: CreatorsPageProps) 
         formParams={formParams}
       />
 
-      <main className="mx-auto w-full max-w-page px-6 pt-[72px] pb-16 lg:px-10">
+      <main className="mx-auto w-full max-w-page px-5 pt-[72px] pb-16 sm:px-6 md:px-0">
         <FilterBar
           variant="creator"
           basePath="/creators"

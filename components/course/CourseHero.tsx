@@ -1,3 +1,4 @@
+import ShareButton from "@/components/course/ShareButton";
 import AppImage from "@/components/ui/AppImage";
 import Button from "@/components/ui/Button";
 import GridOverlay from "@/components/ui/GridOverlay";
@@ -7,7 +8,9 @@ import type { Course } from "@/data/courses";
 import { images } from "@/lib/images";
 
 function PlayIcon() {
-  return <Icon src={images.icons.playIcon} className="h-[72px] w-[72px]" />;
+  return (
+    <Icon src={images.icons.playIcon} alt="Play" className="h-[72px] w-[72px]" />
+  );
 }
 
 interface CourseHeroProps {
@@ -17,14 +20,16 @@ interface CourseHeroProps {
 export default function CourseHero({ course }: CourseHeroProps) {
   const reviewCount = course.comments.replace(/\s*Comments?/, "");
   const pills = [
-    { icon: images.icons.heroLevel, label: course.level },
+    { icon: images.icons.heroLevel, label: course.level, alt: "Level" },
     {
       icon: images.icons.heroStar,
       label: `${course.rating} (${reviewCount} reviews)`,
+      alt: "Star",
     },
     {
       icon: images.icons.heroUsers,
       label: `${course.students} Students`,
+      alt: "Students",
     },
   ];
 
@@ -35,7 +40,7 @@ export default function CourseHero({ course }: CourseHeroProps) {
     >
       <GridOverlay />
 
-      <div className="mx-auto w-full max-w-page px-6 pt-[172px] pb-[30px] lg:px-10">
+      <div className="mx-auto w-full max-w-page px-5 pt-[172px] pb-[30px] sm:px-6 md:px-0">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
           <div className="flex flex-col">
             <Title
@@ -68,7 +73,7 @@ export default function CourseHero({ course }: CourseHeroProps) {
                   key={pill.label}
                   className="flex h-10 items-center gap-2 rounded-full bg-white px-6 py-2"
                 >
-                  <Icon src={pill.icon} className="h-6 w-6 shrink-0" />
+                  <Icon src={pill.icon} alt={pill.alt} className="h-6 w-6 shrink-0" />
                   <span className="text-label-m font-medium text-steel-950">
                     {pill.label}
                   </span>
@@ -77,10 +82,7 @@ export default function CourseHero({ course }: CourseHeroProps) {
             </div>
           </div>
 
-          <Button size="none" className="h-10 shrink-0 gap-2 px-6 py-2 text-base">
-            <Icon src={images.icons.share} className="h-6 w-6" />
-            Share
-          </Button>
+          <ShareButton />
         </div>
 
         <div className="relative mt-6 aspect-[720/479] w-full max-w-[720px] overflow-hidden rounded-card">

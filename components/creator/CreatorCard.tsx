@@ -55,11 +55,11 @@ export default function CreatorCard({ creator }: CreatorCardProps) {
 
           <div className="flex items-center gap-3">
             <span className="flex items-center gap-1 rounded-full bg-steel-50 px-3 py-1.5 text-xs leading-[1.2] font-medium text-steel-700">
-              <Icon src={images.icons.category} className="h-5 w-5" />
+              <Icon src={images.icons.category} alt="Category" className="h-5 w-5" />
               {courseCount} {courseCount === 1 ? "Course" : "Courses"}
             </span>
             <span className="flex items-center gap-1 rounded-full bg-steel-50 px-3 py-1.5 text-xs leading-[1.2] font-medium text-steel-700">
-              <Icon src={images.icons.heroUsers} className="h-5 w-5" />
+              <Icon src={images.icons.heroUsers} alt="Users" className="h-5 w-5" />
               {creator.followers} Followers
             </span>
           </div>
